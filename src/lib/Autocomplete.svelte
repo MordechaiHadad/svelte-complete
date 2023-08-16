@@ -106,6 +106,11 @@
 
     element.classList.remove("active-suggestion");
   }
+
+  function setAllInactive() {
+    suggestionsIndex = -1;
+    setInactiveSuggestion(previousSuggestion);
+  }
 </script>
 
 <div
@@ -126,8 +131,9 @@
     on:input={() => {
       if (!showSuggestionsDiv) {
         showSuggestionsDiv = true;
-        suggestionsIndex = -1;
       }
+
+      setAllInactive();
     }}
   />
   {#if showSuggestionsDiv}
