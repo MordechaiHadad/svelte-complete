@@ -74,7 +74,7 @@
     }
 
     const isArrowUp = event.key === "ArrowUp";
-    const edgeIndex = isArrowUp ? 0 : suggestionContainer.children.length;
+    const edgeIndex = isArrowUp ? 0 : (suggestionContainer.children.length -1);
 
     if (suggestionsIndex === edgeIndex) {
       suggestionsIndex = isArrowUp ? suggestionContainer.children.length : -1;
