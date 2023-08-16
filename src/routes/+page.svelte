@@ -1,9 +1,10 @@
 <script>
   import Autocomplete from "$lib/Autocomplete.svelte";
+  let value = "";
 </script>
 
 <div dir="rtl">
-  <Autocomplete items={["Apple", "Pineapple", "Homelander"]} />
+  <Autocomplete items={["Apple", "Pineapple", "Homelander"]} bind:value />
 
   <Autocomplete items={["Apple", "Pineapple", "Homelander"]} />
 </div>

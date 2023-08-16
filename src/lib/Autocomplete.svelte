@@ -3,11 +3,10 @@
 
   export let items: any[] = [];
   export let noResultsMessage = "No results found";
+  export let value = "";
 
   let containerElement: HTMLDivElement;
   let inputElement: HTMLInputElement;
-
-  let value = "";
 
   // autocomplete stuff
   let showSuggestionsDiv = false;
