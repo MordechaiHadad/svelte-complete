@@ -65,8 +65,11 @@
       return;
     }
 
-    const suggestionContainer =
-      inputElement.nextElementSibling as HTMLDivElement;
+    event.preventDefault();
+
+    const suggestionContainer = inputElement.parentElement?.querySelector(
+      "#suggestions-list"
+    ) as HTMLDivElement;
 
     if (!suggestionContainer) {
       return;
@@ -107,11 +110,20 @@
     element.classList.remove("active-suggestion");
   }
 
-  function setAllInactive() {
-    suggestionsIndex = -1;
-    setInactiveSuggestion(previousSuggestion);
+  async function setAllInactive() {
+    await Promise.resolve();
+    console.log(suggestionsIndex, results.length);
+    if (suggestionsIndex >= results.length) {
+      suggestionsIndex = -1;
+      setInactiveSuggestion(previousSuggestion);
+    }
   }
 </script>
+
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+/>
 
 <div
   class="autocomplete-container"
@@ -128,18 +140,19 @@
     bind:this={inputElement}
     on:focus={() => (showSuggestionsDiv = true)}
     on:keydown={keydownHandler}
-    on:input={() => {
+    on:input={async () => {
       if (!showSuggestionsDiv) {
         showSuggestionsDiv = true;
       }
 
-      setAllInactive();
+      await setAllInactive();
     }}
   />
+  <span class="material-symbols-outlined autocomplete-input-icon" tabindex="-1">
+    expand_more
+  </span>
   {#if showSuggestionsDiv}
-    <div
-      class="suggestions-list"
-    >
+    <div id="suggestions-list" class="suggestions-list">
       {#each results as item, i}
         <button
           class="suggestion"
@@ -169,6 +182,10 @@
   }
   :global(.autocomplete-input:focus) {
     @apply border-blue-500;
+  }
+  :global(.autocomplete-input-icon) {
+    transform: translateY(-50%);
+    @apply absolute top-1/2 right-2 select-none;
   }
   :global(.suggestions-list) {
     @apply flex flex-col rounded-md border p-2 absolute top-full mt-1 right-0 left-0 z-50 bg-white overflow-y-auto overflow-x-hidden max-h-40;
