@@ -112,7 +112,6 @@
 
   async function setAllInactive() {
     await Promise.resolve();
-    console.log(suggestionsIndex, results.length);
     if (suggestionsIndex >= results.length) {
       suggestionsIndex = -1;
       setInactiveSuggestion(previousSuggestion);
