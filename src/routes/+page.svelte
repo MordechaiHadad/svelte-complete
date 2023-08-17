@@ -4,7 +4,7 @@
 </script>
 
 <div dir="rtl">
-  <Autocomplete items={["Apple", "Pineapple", "Homelander"]} bind:value />
+  <Autocomplete items={["Apple", "Pineapple", "Homelander", "Brazza"]} bind:value />
 
   <Autocomplete items={["Apple", "Pineapple", "Homelander"]} />
 </div>

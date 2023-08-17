@@ -73,7 +73,7 @@
     }
 
     const isArrowUp = event.key === "ArrowUp";
-    const edgeIndex = isArrowUp ? 0 : (suggestionContainer.children.length -1);
+    const edgeIndex = isArrowUp ? 0 : suggestionContainer.children.length - 1;
 
     if (suggestionsIndex === edgeIndex) {
       suggestionsIndex = isArrowUp ? suggestionContainer.children.length : -1;
@@ -94,6 +94,7 @@
 
   function setActiveSuggestion(element: HTMLButtonElement) {
     element.classList.add("active-suggestion");
+    element.scrollIntoView({ block: "nearest" });
     setInactiveSuggestion(previousSuggestion);
     previousSuggestion = element;
   }
@@ -113,7 +114,7 @@
 </script>
 
 <div
-  class="relative w-fit"
+  class="autocomplete-container"
   id="autocomplete-container"
   use:clickOutside
   on:click-outside={() => (showSuggestionsDiv = false)}
@@ -122,7 +123,7 @@
   <input
     id="autocomplete-input"
     type="text"
-    class="rounded-md border p-2 outline-none focus:border-blue-500 w-60"
+    class="autocomplete-input"
     bind:value
     bind:this={inputElement}
     on:focus={() => (showSuggestionsDiv = true)}
@@ -136,10 +137,12 @@
     }}
   />
   {#if showSuggestionsDiv}
-    <div class="flex flex-col rounded-md border p-2 absolute top-full mt-1 right-0 left-0 z-50 bg-white">
+    <div
+      class="suggestions-list"
+    >
       {#each results as item, i}
         <button
-          class="rounded-md p-2 hover:bg-blue-500/20"
+          class="suggestion"
           tabindex="-1"
           on:click={() => (value = item)}
           on:keydown={handleTabbingSuggestions}
@@ -158,6 +161,24 @@
 </div>
 
 <style>
+  :global(.autocomplete-container) {
+    @apply relative w-fit;
+  }
+  :global(.autocomplete-input) {
+    @apply rounded-md border p-2 outline-none w-60;
+  }
+  :global(.autocomplete-input:focus) {
+    @apply border-blue-500;
+  }
+  :global(.suggestions-list) {
+    @apply flex flex-col rounded-md border p-2 absolute top-full mt-1 right-0 left-0 z-50 bg-white overflow-y-auto overflow-x-hidden max-h-40;
+  }
+  :global(.suggestion) {
+    @apply rounded-md p-2;
+  }
+  :global(.suggestion:hover) {
+    @apply bg-blue-500/20;
+  }
   :global(.active-suggestion) {
     @apply bg-blue-500/20;
   }
