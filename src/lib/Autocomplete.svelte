@@ -156,7 +156,10 @@
         <button
           class="suggestion"
           tabindex="-1"
-          on:click={() => (value = item)}
+          on:click={() => {
+            value = item;
+            showSuggestionsDiv = false;
+          }}
           on:keydown={handleTabbingSuggestions}
         >
           {#if value.length > 0}
