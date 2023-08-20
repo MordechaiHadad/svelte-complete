@@ -1,10 +1,14 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { clickOutside } from "./ClickOutside.js";
 
   export let items: any[] = [];
   export let noResultsMessage = "No results found";
   export let value = "";
- 
+  export let setItemsOnFocus = async (): Promise<any[]> => {
+    return [];
+  };
+
   let containerElement: HTMLDivElement;
   let inputElement: HTMLInputElement;
 
@@ -137,7 +141,14 @@
     class="autocomplete-input"
     bind:value
     bind:this={inputElement}
-    on:focus={() => (showSuggestionsDiv = true)}
+    on:focus={async () => {
+      showSuggestionsDiv = true;
+      const result = await setItemsOnFocus();
+
+      if (items.length === 0 && result.length > 0) {
+        items = result;
+      }
+    }}
     on:keydown={keydownHandler}
     on:input={async () => {
       if (!showSuggestionsDiv) {
@@ -176,14 +187,25 @@
 </div>
 
 <style>
+  :root {
+    --autocomplete-input-y-padding: 0.5rem;
+    --autocomplete-input-x-padding: 0.5rem;
+    --autocomplete-input-width: 15rem;
+    --autocomplete-border-color: rgb(59 130 246);
+  }
   :global(.autocomplete-container) {
     @apply relative w-fit;
   }
   :global(.autocomplete-input) {
-    @apply rounded-md border p-2 outline-none w-60;
+    @apply rounded-md border outline-none;
+    padding-left: var(--autocomplete-input-x-padding);
+    padding-right: var(--autocomplete-input-x-padding);
+    padding-top: var(--autocomplete-input-y-padding);
+    padding-bottom: var(--autocomplete-input-y-padding);
+    width: var(--autocomplete-input-width);
   }
   :global(.autocomplete-input:focus) {
-    @apply border-blue-500;
+    border-color: var(--autocomplete-border-color);
   }
   :global(.autocomplete-input-icon) {
     transform: translateY(-50%);
