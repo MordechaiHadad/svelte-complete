@@ -3,7 +3,9 @@
   let value = "";
 </script>
 
-<Autocomplete
-  items={["Apple", "Pineapple", "Homelander", "Brazza"]}
-  bind:value
-/>
+<div dir="rtl">
+  <Autocomplete
+    items={["Apple", "Pineapple", "Homelander", "Brazza"]}
+    bind:value
+  />
+</div>
