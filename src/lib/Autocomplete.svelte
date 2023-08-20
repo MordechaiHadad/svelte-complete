@@ -4,7 +4,7 @@
   export let items: any[] = [];
   export let noResultsMessage = "No results found";
   export let value = "";
-
+ 
   let containerElement: HTMLDivElement;
   let inputElement: HTMLInputElement;
 
@@ -187,13 +187,7 @@
   }
   :global(.autocomplete-input-icon) {
     transform: translateY(-50%);
-    @apply absolute top-1/2 select-none;
-  }
-  .autocomplete-input-icon:dir(rtl) {
-    @apply left-2;
-  } 
-  .autocomplete-input-icon:dir(ltr) {
-    @apply right-2;
+    @apply absolute top-1/2 right-2 select-none;
   }
   :global(.suggestions-list) {
     @apply flex flex-col rounded-md border p-2 absolute top-full mt-1 right-0 left-0 z-50 bg-white overflow-y-auto overflow-x-hidden max-h-40;
