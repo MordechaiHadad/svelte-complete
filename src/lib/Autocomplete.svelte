@@ -191,7 +191,8 @@
     --autocomplete-input-y-padding: 0.5rem;
     --autocomplete-input-x-padding: 0.5rem;
     --autocomplete-input-width: 15rem;
-    --autocomplete-border-color: rgb(59 130 246);
+    --autocomplete-input-border-color: rgb(59 130 246);
+    --autocomplete-active-suggestion-background-color: rgb(59 130 246 / 0.2);
   }
   :global(.autocomplete-container) {
     @apply relative w-fit;
@@ -205,7 +206,7 @@
     width: var(--autocomplete-input-width);
   }
   :global(.autocomplete-input:focus) {
-    border-color: var(--autocomplete-border-color);
+    border-color: var(--autocomplete-input-border-color);
   }
   :global(.autocomplete-input-icon) {
     transform: translateY(-50%);
@@ -218,9 +219,9 @@
     @apply rounded-md p-2;
   }
   :global(.suggestion:hover) {
-    @apply bg-blue-500/20;
+    background-color: var(--autocomplete-active-suggestion-background-color);
   }
   :global(.active-suggestion) {
-    @apply bg-blue-500/20;
+    background-color: var(--autocomplete-active-suggestion-background-color);
   }
 </style>
