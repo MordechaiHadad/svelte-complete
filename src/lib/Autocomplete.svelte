@@ -1,13 +1,27 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { clickOutside } from "./ClickOutside.js";
+  import {
+    boldUnmatchedChars,
+    display,
+    filterOnChange,
+    returnNewValue,
+    sortItems,
+  } from "./modules.js";
 
-  export let items: any[] = [];
+  export let items: string[] | object[] = [];
   export let noResultsMessage = "No results found";
   export let value = "";
   export let setItemsOnFocus = async (): Promise<any[]> => {
     return [];
   };
+  export let sort:
+    | "ascend"
+    | "descend"
+    | undefined
+    | ((a: any, b: any) => number) = undefined;
+
+  export let displayField = "";
 
   let containerElement: HTMLDivElement;
   let inputElement: HTMLInputElement;
@@ -18,29 +32,7 @@
   let previousSuggestion: HTMLButtonElement;
 
   let results = items;
-  $: value,
-    (results = items.filter((item: string) =>
-      item.toLocaleLowerCase().includes(value.toLocaleLowerCase())
-    ));
-
-  function boldUnmatchedChars(word: string, value: string) {
-    let result = "";
-    let i = 0;
-
-    let lowerWord = word.toLowerCase();
-    let lowerValue = value.toLowerCase();
-    while (i < lowerWord.length) {
-      let slice = lowerWord.slice(i, i + lowerValue.length);
-      if (slice === lowerValue) {
-        result += word.slice(i, i + value.length);
-        i += value.length;
-      } else {
-        result += `<b>${word[i]}</b>`;
-        i++;
-      }
-    }
-    return result;
-  }
+  $: value, (results = filterOnChange(displayField, items, value));
 
   function keydownHandler(event: KeyboardEvent) {
     // Handle esc key
@@ -121,6 +113,12 @@
       setInactiveSuggestion(previousSuggestion);
     }
   }
+
+  onMount(() => {
+    if (sort && items.length > 0) {
+      items = sortItems(items, sort);
+    }
+  });
 </script>
 
 <link
@@ -146,7 +144,7 @@
       const result = await setItemsOnFocus();
 
       if (items.length === 0 && result.length > 0) {
-        items = result;
+        items = sortItems(result, sort);
       }
     }}
     on:keydown={keydownHandler}
@@ -168,15 +166,15 @@
           class="suggestion"
           tabindex="-1"
           on:click={() => {
-            value = item;
+            value = returnNewValue(item, displayField);
             showSuggestionsDiv = false;
           }}
           on:keydown={handleTabbingSuggestions}
         >
           {#if value.length > 0}
-            {@html boldUnmatchedChars(item, value)}
+            {@html boldUnmatchedChars(display(displayField, item), value)}
           {:else}
-            {item}
+            {display(displayField, item)}
           {/if}</button
         >
       {:else}
@@ -200,7 +198,7 @@
   :global(.autocomplete-input) {
     @apply rounded-md border outline-none;
     padding-left: var(--autocomplete-input-x-padding);
-    padding-right: var(--autocomplete-input-x-padding);
+    padding-right: calc(var(--autocomplete-input-x-padding) + 1.5rem);
     padding-top: var(--autocomplete-input-y-padding);
     padding-bottom: var(--autocomplete-input-y-padding);
     width: var(--autocomplete-input-width);
