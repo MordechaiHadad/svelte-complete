@@ -9,8 +9,8 @@
   ];
 
   function test2(a: any, b: any): number {
-    return a["name"].localeCompare(b["name"]);
+    return b["id"] - a["id"];
   }
 </script>
 
-<Autocomplete {items} displayField={"name"} sort={test2} />
+<Autocomplete {items} displayField={"name"} sort={"ascend"} />
