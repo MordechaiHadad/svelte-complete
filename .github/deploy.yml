@@ -26,7 +26,7 @@ jobs:
 
       - name: build
         env:
-          BASE_PATH: '/your-repo-name'
+          BASE_PATH: '/svelte-complete'
         run: |
           npm run build
           touch build/.nojekyll
