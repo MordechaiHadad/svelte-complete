@@ -186,35 +186,61 @@
 
 <style>
   :root {
+    --autocomplete-container-width: fit-content;
+    --autocomplete-container-height: fit-content;
     --autocomplete-input-y-padding: 0.5rem;
     --autocomplete-input-x-padding: 0.5rem;
     --autocomplete-input-width: 15rem;
-    --autocomplete-input-border-color: rgb(59 130 246);
+    --autocomplete-input-focus-border-color: rgb(59 130 246);
     --autocomplete-active-suggestion-background-color: rgb(59 130 246 / 0.2);
+    --autocomplete-suggestions-list-background-color: rgb(255 255 255)
   }
   :global(.autocomplete-container) {
-    @apply relative w-fit;
+    position: relative;
+    width: var(--autocomplete-container-width);
+    height: var(--autocomplete-container-height);
   }
   :global(.autocomplete-input) {
-    @apply rounded-md border outline-none;
     padding-left: var(--autocomplete-input-x-padding);
     padding-right: calc(var(--autocomplete-input-x-padding) + 1.5rem);
     padding-top: var(--autocomplete-input-y-padding);
     padding-bottom: var(--autocomplete-input-y-padding);
     width: var(--autocomplete-input-width);
+    border-radius: 0.375rem;
+    border-width: 1px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
   }
   :global(.autocomplete-input:focus) {
-    border-color: var(--autocomplete-input-border-color);
+    border-color: var(--autocomplete-input-focus-border-color);
   }
   :global(.autocomplete-input-icon) {
     transform: translateY(-50%);
-    @apply absolute top-1/2 right-2 select-none;
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    user-select: none;
   }
   :global(.suggestions-list) {
-    @apply flex flex-col rounded-md border p-2 absolute top-full mt-1 right-0 left-0 z-50 bg-white overflow-y-auto overflow-x-hidden max-h-40;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.375rem;
+    border-width: 1px;
+    padding: 0.5rem;
+    position: absolute;
+    top: 100%;
+    margin-top: 0.25rem;
+    right: 0px;
+    left: 0px;
+    z-index: 50;
+    background-color: var(--autocomplete-suggestions-list-background-color);
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 10rem;
   }
   :global(.suggestion) {
-    @apply rounded-md p-2;
+    border-radius: 0.375rem;
+    padding: 0.5rem;
   }
   :global(.suggestion:hover) {
     background-color: var(--autocomplete-active-suggestion-background-color);
