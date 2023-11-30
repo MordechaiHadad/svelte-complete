@@ -4,6 +4,7 @@
   import html from "svelte-highlight/languages/xml";
   import atomDark from "svelte-highlight/styles/atom-one-dark";
   import type { ThemeHandler } from "./utils.js";
+  import { onMount } from "svelte";
 
   export let themeHandler: ThemeHandler;
   export let header: string;
@@ -27,7 +28,8 @@
 <div class="card shadow-card-shadow-light dark:shadow-card-shadow-dark">
   <div class="flex flex-col items-center gap-3 w-full">
     <button
-      class="ti ti-chevron-up self-end text-base md:text-3xl"
+      id="collapse-button"
+      class="ti ti-chevron-up self-end text-base md:text-3xl transition-transform duration-200 ease-in-out"  class:collapsed-icon={!isCollapsed}
       on:click={() => (isCollapsed = !isCollapsed)}
     >
     </button>
@@ -73,5 +75,8 @@
   }
   .card {
     @apply w-full flex flex-col gap-4 items-center rounded-lg p-4;
+  }
+  .collapsed-icon {
+    transform: rotate(180deg);
   }
 </style>
