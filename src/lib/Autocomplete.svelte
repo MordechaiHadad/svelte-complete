@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { clickOutside } from "./ClickOutside.js";
   import {
+    boldMatchedChars,
     boldUnmatchedChars,
     display,
     filterOnChange,
@@ -20,6 +21,7 @@
     | "descend"
     | undefined
     | ((a: any, b: any) => number) = undefined;
+  export let highlightCharacters: "matched" | "unmatched" = "matched";
 
   export let displayField = "";
 
@@ -172,7 +174,9 @@
           on:keydown={handleTabbingSuggestions}
         >
           {#if value.length > 0}
-            {@html boldUnmatchedChars(display(displayField, item), value)}
+            {@html highlightCharacters == "matched"
+              ? boldMatchedChars(display(displayField, item), value)
+              : boldUnmatchedChars(display(displayField, item), value)}
           {:else}
             {display(displayField, item)}
           {/if}</button
@@ -186,6 +190,7 @@
 
 <style>
   :root {
+    --autocomplete-text-color: rgb(23 23 23); 
     --autocomplete-container-width: fit-content;
     --autocomplete-container-height: fit-content;
     --autocomplete-input-y-padding: 0.5rem;
@@ -193,7 +198,9 @@
     --autocomplete-input-width: 15rem;
     --autocomplete-input-focus-border-color: rgb(59 130 246);
     --autocomplete-active-suggestion-background-color: rgb(59 130 246 / 0.2);
-    --autocomplete-suggestions-list-background-color: rgb(255 255 255)
+    --autocomplete-suggestions-list-background-color: rgb(255 255 255);
+    --autocomplete-input-icon-color: var(--autocomplete-text-color);
+    --autocomplete-suggestion-color: var(--autocomplete-text-color);
   }
   :global(.autocomplete-container) {
     position: relative;
@@ -210,11 +217,13 @@
     border-width: 1px;
     outline: 2px solid transparent;
     outline-offset: 2px;
+    color: var(--autocomplete-text-color);
   }
   :global(.autocomplete-input:focus) {
     border-color: var(--autocomplete-input-focus-border-color);
   }
   :global(.autocomplete-input-icon) {
+    color: var(--autocomplete-input-icon-color);
     transform: translateY(-50%);
     position: absolute;
     top: 50%;
@@ -239,6 +248,7 @@
     max-height: 10rem;
   }
   :global(.suggestion) {
+    color: var(--autocomplete-suggestion-color);
     border-radius: 0.375rem;
     padding: 0.5rem;
   }
