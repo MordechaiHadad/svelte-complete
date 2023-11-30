@@ -4,6 +4,7 @@
   import html from "svelte-highlight/languages/xml";
   import atomDark from "svelte-highlight/styles/atom-one-dark";
   import type { ThemeHandler } from "./utils.js";
+  import { slide } from "svelte/transition";
   import { onMount } from "svelte";
 
   export let themeHandler: ThemeHandler;
@@ -19,18 +20,30 @@
   export let displayField: string = "";
 
   let isCollapsed = false;
+  let width = 0;
+  let component: HTMLDivElement;
+
+  function collapse() {
+    width = component.clientWidth;
+    component.style.width = isCollapsed ? "100%" : width + "px"; // set this so when the containers are collapsed they will stay at the same size as before
+    isCollapsed = !isCollapsed;
+  }
 </script>
 
 <svelte:head>
   {@html atomDark}
 </svelte:head>
 
-<div class="card shadow-card-shadow-light dark:shadow-card-shadow-dark">
+<div
+  class="card shadow-card-shadow-light dark:shadow-card-shadow-dark p-4 md:p-6"
+  bind:this={component}
+>
   <div class="flex flex-col items-center gap-3 w-full">
     <button
       id="collapse-button"
-      class="ti ti-chevron-up self-end text-base md:text-3xl transition-transform duration-200 ease-in-out"  class:collapsed-icon={isCollapsed}
-      on:click={() => (isCollapsed = !isCollapsed)}
+      class="ti ti-chevron-up self-end text-base md:text-3xl transition-transform duration-200 ease-in-out"
+      class:collapsed-icon={isCollapsed}
+      on:click={() => collapse()}
     >
     </button>
     <div class="flex flex-row gap-4 w-full place-content-between">
@@ -42,10 +55,13 @@
     </div>
   </div>
   {#if !isCollapsed}
-    <p class="text-xs md:text-lg text-left w-full md:max-w-prose">
+    <p
+      class="text-xs md:text-lg text-left w-full md:max-w-prose"
+      transition:slide
+    >
       {description}
     </p>
-    <div class="flex flex-col md:flex-row w-full gap-6">
+    <div class="flex flex-col md:flex-row w-full gap-6" transition:slide>
       <Autocomplete {items} {displayField} />
       <Highlight language={html} {code} />
     </div>
@@ -74,7 +90,7 @@
     @apply rounded-md text-base;
   }
   .card {
-    @apply w-full flex flex-col gap-4 items-center rounded-lg p-4;
+    @apply w-full flex flex-col gap-4 items-center rounded-lg;
   }
   .collapsed-icon {
     transform: rotate(180deg);
