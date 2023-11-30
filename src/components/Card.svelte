@@ -29,7 +29,7 @@
   <div class="flex flex-col items-center gap-3 w-full">
     <button
       id="collapse-button"
-      class="ti ti-chevron-up self-end text-base md:text-3xl transition-transform duration-200 ease-in-out"  class:collapsed-icon={!isCollapsed}
+      class="ti ti-chevron-up self-end text-base md:text-3xl transition-transform duration-200 ease-in-out"  class:collapsed-icon={isCollapsed}
       on:click={() => (isCollapsed = !isCollapsed)}
     >
     </button>
