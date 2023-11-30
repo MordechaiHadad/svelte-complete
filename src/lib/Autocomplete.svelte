@@ -201,6 +201,7 @@
     --autocomplete-suggestions-list-background-color: rgb(255 255 255);
     --autocomplete-input-icon-color: var(--autocomplete-text-color);
     --autocomplete-suggestion-color: var(--autocomplete-text-color);
+
   }
   :global(.autocomplete-container) {
     position: relative;
@@ -246,6 +247,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 10rem;
+    color: var(--autocomplete-text-color);
   }
   :global(.suggestion) {
     color: var(--autocomplete-suggestion-color);
