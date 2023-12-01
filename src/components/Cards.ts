@@ -48,4 +48,4 @@ const objects = {
 	displayField: "name"
 };
 
-export const cards: cardTemplate[] = [basic, objects, objects];
+export const cards: cardTemplate[] = [basic, objects];
