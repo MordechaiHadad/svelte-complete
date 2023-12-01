@@ -1,98 +1,92 @@
 <script lang="ts">
-  import Autocomplete from "$lib/Autocomplete.svelte";
-  import Highlight from "svelte-highlight";
-  import html from "svelte-highlight/languages/xml";
-  import atomDark from "svelte-highlight/styles/atom-one-dark";
-  import type { ThemeHandler } from "./utils.js";
-  import { slide } from "svelte/transition";
-  import { onMount } from "svelte";
+    import Autocomplete from "$lib/Autocomplete.svelte";
+    import Highlight from "svelte-highlight";
+    import html from "svelte-highlight/languages/xml";
+    import atomDark from "svelte-highlight/styles/atom-one-dark";
+    import type { ThemeHandler } from "./utils.js";
+    import { slide } from "svelte/transition";
+    import { onMount } from "svelte";
 
-  export let themeHandler: ThemeHandler;
-  export let header: string;
-  export let description: string;
-  export let code: string;
-  export let items: string[] | object[] = [];
-  export let sort:
-    | "ascend"
-    | "descend"
-    | undefined
-    | ((a: any, b: any) => number) = undefined;
-  export let displayField: string = "";
+    export let themeHandler: ThemeHandler;
+    export let header: string;
+    export let description: string;
+    export let code: string;
+    export let items: string[] | object[] = [];
+    export let sort:
+        | "ascend"
+        | "descend"
+        | undefined
+        | ((a: any, b: any) => number) = undefined;
+    export let displayField: string = "";
 
-  let isCollapsed = false;
-  let width = 0;
-  let component: HTMLDivElement;
+    let isCollapsed = false;
+    let width = 0;
+    let component: HTMLDivElement;
 
-  function collapse() {
-    width = component.clientWidth;
-    component.style.width = isCollapsed ? "100%" : width + "px"; // set this so when the containers are collapsed they will stay at the same size as before
-    isCollapsed = !isCollapsed;
-  }
+    function collapse() {
+        width = component.clientWidth;
+        component.style.width = isCollapsed ? "100%" : width + "px"; // set this so when the containers are collapsed they will stay at the same size as before
+        isCollapsed = !isCollapsed;
+    }
 </script>
 
 <svelte:head>
-  {@html atomDark}
+    {@html atomDark}
 </svelte:head>
 
 <div
-  class="card shadow-card-shadow-light dark:shadow-card-shadow-dark p-4 md:p-6"
-  bind:this={component}
+    class="card shadow-card-shadow-light dark:shadow-card-shadow-dark p-4 md:p-6"
+    bind:this={component}
 >
-  <div class="flex flex-col items-center gap-3 w-full">
-    <button
-      id="collapse-button"
-      class="ti ti-chevron-up self-end text-base md:text-3xl transition-transform duration-200 ease-in-out"
-      class:collapsed-icon={isCollapsed}
-      on:click={() => collapse()}
-    >
-    </button>
-    <div class="flex flex-row gap-4 w-full place-content-between">
+    <div class="flex items-center gap-3 w-full place-content-between">
       <p class="text-base md:text-3xl">{header}</p>
-      <button
-        class="bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-xs rounded-md px-3 py-1 md:text-xl md:px-4 md:py-2"
-        >Toggle RTL</button
-      >
+        <button
+            id="collapse-button"
+            class="ti ti-chevron-up self-end text-base md:text-3xl transition-transform duration-200 ease-in-out"
+            class:collapsed-icon={isCollapsed}
+            on:click={() => collapse()}
+        >
+        </button>
     </div>
-  </div>
-  {#if !isCollapsed}
-    <p
-      class="text-xs md:text-lg text-left w-full md:max-w-prose"
-      transition:slide
-    >
-      {description}
-    </p>
-    <div class="flex flex-col md:flex-row w-full gap-6" transition:slide>
-      <Autocomplete {items} {displayField} />
-      <Highlight language={html} {code} />
-    </div>
-  {/if}
+    {#if !isCollapsed}
+        <p
+            class="text-xs md:text-lg text-left w-full md:max-w-prose"
+            transition:slide
+        >
+            {description}
+        </p>
+        <div class="flex flex-col md:flex-row w-full gap-6" transition:slide>
+            <Autocomplete {items} {displayField} />
+            <Highlight language={html} {code} />
+        </div>
+    {/if}
 </div>
 
 <style>
-  :root {
-    --autocomplete-container-width: 100%;
-    --autocomplete-input-width: 100%;
-  }
-  @media (min-width: 768px) {
     :root {
-      --autocomplete-container-width: fit-content;
-      --autocomplete-input-width: fit-content;
+        --autocomplete-container-width: 100%;
+        --autocomplete-input-width: 100%;
     }
-  }
-  :global(pre) {
-    width: 100%;
-
     @media (min-width: 768px) {
-      width: fit-content;
+        :root {
+            --autocomplete-container-width: fit-content;
+            --autocomplete-input-width: fit-content;
+        }
     }
-  }
-  :global(code) {
-    @apply rounded-md text-base;
-  }
-  .card {
-    @apply w-full flex flex-col gap-4 items-center rounded-lg;
-  }
-  .collapsed-icon {
-    transform: rotate(180deg);
-  }
+    :global(pre) {
+        width: 100%;
+
+        @media (min-width: 768px) {
+            width: fit-content;
+        }
+    }
+    :global(code) {
+        @apply rounded-md text-base;
+    }
+    .card {
+        @apply w-full flex flex-col gap-4 items-center rounded-lg;
+    }
+    .collapsed-icon {
+        transform: rotate(180deg);
+    }
 </style>

@@ -42,6 +42,10 @@
                 class="ti hover:text-svelte-brand"
                 on:click={() => themeHandler.toggle()}
             ></button>
+            <button
+                class="bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-base rounded-md px-3 py-1 md:px-4 md:py-2"
+                >Toggle RTL</button
+            >
         </div>
     </div>
     <div class="flex flex-col items-center w-full md:w-fit px-5 gap-4">
