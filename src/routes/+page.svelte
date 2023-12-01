@@ -23,7 +23,7 @@
     class="text-neutrl-900 dark:text-neutral-100 py-8 flex flex-col items-center justify-center gap-6"
 >
     <div
-        class="flex gap-4 flex-col items-center justify-center md:flex-row md:gap-8 w-full sticky top-0 bg-neutral-900/60 backdrop-blur z-50"
+        class="flex gap-4 flex-col items-center justify-center md:flex-row md:gap-8 w-full sticky top-0 bg-neutral-100/60 dark:bg-neutral-900/60 backdrop-blur z-50"
     >
         <div
             class="hidden w-[calc(24px+theme(gap.3)+theme(fontSize.3xl.0))] md:block"
