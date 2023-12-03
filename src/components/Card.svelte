@@ -84,6 +84,10 @@
     }
     .card {
         @apply w-full flex flex-col gap-4 items-center rounded-lg border;
+
+        @media screen and (min-width: 520px) and (max-width: 768px) {
+            width: min-content;
+        }
     }
     .collapsed-icon {
         transform: rotate(180deg);
