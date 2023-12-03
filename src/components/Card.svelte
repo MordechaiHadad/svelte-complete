@@ -5,7 +5,6 @@
     import atomDark from "svelte-highlight/styles/atom-one-dark";
     import type { ThemeHandler } from "./utils.js";
     import { slide } from "svelte/transition";
-    import { onMount } from "svelte";
 
     export let themeHandler: ThemeHandler;
     export let header: string;
@@ -15,6 +14,9 @@
     export let sort: "ascend" | "descend" | ((a: any, b: any) => number) =
         "ascend";
     export let displayField: string = "";
+    export let textDirection: "ltr" | "rtl" = "ltr";
+    export let textAlignment: "left" | "center" | "right" =
+        textDirection === "ltr" ? "left" : "right";
 
     let isCollapsed = false;
     let width = 0;
@@ -53,7 +55,13 @@
             {description}
         </p>
         <div class="flex flex-col md:flex-row w-full gap-6" transition:slide>
-            <Autocomplete {items} {displayField} {sort} />
+            <Autocomplete
+                {items}
+                {displayField}
+                {sort}
+                {textAlignment}
+                {textDirection}
+            />
             <Highlight language={html} {code} />
         </div>
     {/if}

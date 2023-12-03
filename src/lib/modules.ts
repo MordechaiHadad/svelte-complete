@@ -2,7 +2,6 @@ export function sortItems(
     x: any[],
     sort: "ascend" | "descend" | ((a: any, b: any) => number)
 ): any[] {
-    console.log(sort);
     if (typeof sort === "function" && x.every((i) => typeof i === "object")) {
         return x.sort(sort);
     } else if (x.every((i) => typeof i === "string")) {

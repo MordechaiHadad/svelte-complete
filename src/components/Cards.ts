@@ -5,6 +5,7 @@ interface cardTemplate {
     items: string[] | object[];
     displayField: string;
     sort: "ascend" | "descend" | ((a: any, b: any) => number);
+    textAlignment: "left" | "right" | "center";
 }
 
 const basic: cardTemplate = {
@@ -17,11 +18,11 @@ const basic: cardTemplate = {
   let items = ["apple", "banana", "orange"];
 <\/script>
 
-<Autocomplete {items} \/>
-  `,
+<Autocomplete {items} \/>`,
     items: ["apple", "banana", "orange"],
     displayField: "",
     sort: "ascend",
+    textAlignment: "left",
 };
 
 const objects: cardTemplate = {
@@ -39,8 +40,7 @@ const objects: cardTemplate = {
   ];
 <\/script>
 
-<Autocomplete {items} displayField="name" \/>
-  `,
+<Autocomplete {items} displayField="name" \/>`,
     items: [
         { name: "Succes", id: 0 },
         { name: "Warning", id: 1 },
@@ -49,6 +49,7 @@ const objects: cardTemplate = {
     ],
     displayField: "name",
     sort: "ascend",
+    textAlignment: "left",
 };
 
 const sorts: cardTemplate = {
@@ -68,8 +69,7 @@ const sorts: cardTemplate = {
   const sort = (a: {id: number, name: string}, b: {id: number, name: string}) => b.name.localeCompare(a.name);
 <\/script>
 
-<Autocomplete {items} {sort} displayField="name" \/>
-  `,
+<Autocomplete {items} {sort} displayField="name" \/>`,
     items: [
         { name: "Succes", id: 0 },
         { name: "Warning", id: 1 },
@@ -79,6 +79,24 @@ const sorts: cardTemplate = {
     displayField: "name",
     sort: (a: { id: number; name: string }, b: { id: number; name: string }) =>
         b.name.localeCompare(a.name),
+    textAlignment: "left",
 };
 
-export const cards: cardTemplate[] = [basic, objects, sorts];
+const textAlignment: cardTemplate = {
+    header: "Suggestions list text alignments",
+    description:
+        "Your suggestions list items can have three different alignments: left (default), right, and center.",
+    code: `<script>
+  import Autocomplete from "svelte-complete";
+
+  let items = ["apple", "banana", "orange"];
+<\/script>
+
+<Autocomplete {items} textAlignment={"center"} \/>`,
+    items: ["apple", "banana", "orange"],
+    displayField: "",
+    sort: "ascend",
+    textAlignment: "center",
+};
+
+export const cards: cardTemplate[] = [basic, objects, sorts, textAlignment];

@@ -20,7 +20,9 @@
         "ascend";
     export let highlightCharacters: "matched" | "unmatched" = "matched";
     export let displayField = "";
-    export let textAlignment: "left" | "center" | "right" = "left";
+    export let textDirection: "ltr" | "rtl" = "ltr";
+    export let textAlignment: "left" | "center" | "right" =
+        textDirection === "ltr" ? "left" : "right";
 
     let containerElement: HTMLDivElement;
     let inputElement: HTMLInputElement;
@@ -121,6 +123,10 @@
         if (sort && items.length > 0) {
             items = sortItems(items, sort);
         }
+
+        if (textDirection === "rtl") {
+            containerElement.setAttribute("dir", "rtl");
+        }
     });
 </script>
 
@@ -140,6 +146,8 @@
         id="autocomplete-input"
         type="text"
         class="autocomplete-input"
+        class:autocomplete-input-padding-lrt={textDirection === "ltr"}
+        class:autocomplete-input-padding-rtl={textDirection === "rtl"}
         bind:value
         bind:this={inputElement}
         on:focus={async () => {
@@ -161,6 +169,7 @@
     />
     <span
         class="material-symbols-outlined autocomplete-input-icon"
+        style={textDirection == "rtl" ? "left: 0.5rem" : "right: 0.5rem"}
         tabindex="-1"
     >
         expand_more
@@ -221,8 +230,6 @@
         height: var(--autocomplete-container-height);
     }
     :global(.autocomplete-input) {
-        padding-left: var(--autocomplete-input-x-padding);
-        padding-right: calc(var(--autocomplete-input-x-padding) + 1.5rem);
         padding-top: var(--autocomplete-input-y-padding);
         padding-bottom: var(--autocomplete-input-y-padding);
         width: var(--autocomplete-input-width);
@@ -232,6 +239,14 @@
         outline-offset: 2px;
         color: var(--autocomplete-text-color);
     }
+    :global(.autocomplete-input-padding-lrt) {
+        padding-right: calc(var(--autocomplete-input-x-padding) + 1.5rem);
+        padding-left: var(--autocomplete-input-x-padding);
+    }
+    :global(.autocomplete-input-padding-rtl) {
+        padding-left: calc(var(--autocomplete-input-x-padding) + 1.5rem);
+        padding-right: var(--autocomplete-input-x-padding);
+    }
     :global(.autocomplete-input:focus) {
         border-color: var(--autocomplete-input-focus-border-color);
     }
@@ -240,11 +255,7 @@
         transform: translateY(-50%);
         position: absolute;
         top: 50%;
-        right: 0.5rem;
         user-select: none;
-        transition-property: transform;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 200ms;
     }
     :global(.suggestions-list) {
         display: flex;

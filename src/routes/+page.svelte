@@ -7,6 +7,15 @@
 
     let themeHandler: ThemeHandler;
     let darkThemeButton: HTMLButtonElement;
+    let textDirection: "ltr" | "rtl" = "ltr";
+
+    function toggleTextDir() {
+        if (textDirection === "ltr") {
+            textDirection = "rtl";
+            return;
+        }
+        textDirection = "ltr";
+    }
 
     onMount(() => {
         const isDarkTheme = window.matchMedia(
@@ -47,6 +56,7 @@
             <button
                 class="ti ti-text-direction-rtl p-1 rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-md transition-all duration-300 ease-in-out"
                 title="Toggle between LTR/RTL"
+                on:click={toggleTextDir}
             ></button>
         </div>
     </div>
@@ -60,6 +70,8 @@
                 items={card.items}
                 displayField={card.displayField}
                 sort={card.sort}
+                textAlignment={card.textAlignment}
+                {textDirection}
             ></Card>
         {/each}
     </div>
