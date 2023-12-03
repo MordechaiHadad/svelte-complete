@@ -15,8 +15,7 @@
     export let sort:
         | "ascend"
         | "descend"
-        | undefined
-        | ((a: any, b: any) => number) = undefined;
+        | ((a: any, b: any) => number) = "ascend";
     export let displayField: string = "";
 
     let isCollapsed = false;
@@ -50,13 +49,13 @@
     </div>
     {#if !isCollapsed}
         <p
-            class="text-xs md:text-lg text-left w-full md:max-w-prose"
+            class="text-xs md:text-lg text-left w-full max-w-prose"
             transition:slide
         >
             {description}
         </p>
         <div class="flex flex-col md:flex-row w-full gap-6" transition:slide>
-            <Autocomplete {items} {displayField} />
+            <Autocomplete {items} {displayField} {sort} />
             <Highlight language={html} {code} />
         </div>
     {/if}
@@ -74,7 +73,7 @@
         }
     }
     :global(pre) {
-        width: 100%;
+        @apply w-full max-w-md;
 
         @media (min-width: 768px) {
             width: fit-content;

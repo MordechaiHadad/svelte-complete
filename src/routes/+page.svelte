@@ -59,13 +59,8 @@
                 code={card.code}
                 items={card.items}
                 displayField={card.displayField}
+                sort={card.sort}
             ></Card>
         {/each}
     </div>
 </div>
-
-<style>
-    .navbar-stuck {
-        @apply py-4;
-    }
-</style>

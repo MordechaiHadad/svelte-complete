@@ -19,8 +19,7 @@
     export let sort:
         | "ascend"
         | "descend"
-        | undefined
-        | ((a: any, b: any) => number) = undefined;
+        | ((a: any, b: any) => number) = "ascend";
     export let highlightCharacters: "matched" | "unmatched" = "matched";
     export let displayField = "";
     export let textAlignment: "left" | "center" | "right" = "left";

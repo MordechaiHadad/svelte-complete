@@ -1,13 +1,14 @@
 export function sortItems(
     x: any[],
-    sort: "ascend" | "descend" | undefined | ((a: any, b: any) => number)
+    sort: "ascend" | "descend" | ((a: any, b: any) => number)
 ): any[] {
+    console.log(sort);
     if (typeof sort === "function" && x.every((i) => typeof i === "object")) {
         return x.sort(sort);
     } else if (x.every((i) => typeof i === "string")) {
         return sort === "ascend"
-            ? x.sort()
-            : x.sort((a: string, b: string) => b.localeCompare(a));
+        ? x.sort()
+        : x.sort((a: string, b: string) => b.localeCompare(a));
     }
 
     return x;
