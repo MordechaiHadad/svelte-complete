@@ -50,7 +50,7 @@
             ></button>
         </div>
     </div>
-    <div class="flex flex-col items-center w-full md:w-fit px-5 gap-4">
+    <div class="flex flex-col items-center w-full md:w-fit px-5 gap-8">
         {#each cards as card}
             <Card
                 {themeHandler}
