@@ -12,10 +12,8 @@
     export let description: string;
     export let code: string;
     export let items: string[] | object[] = [];
-    export let sort:
-        | "ascend"
-        | "descend"
-        | ((a: any, b: any) => number) = "ascend";
+    export let sort: "ascend" | "descend" | ((a: any, b: any) => number) =
+        "ascend";
     export let displayField: string = "";
 
     let isCollapsed = false;
@@ -38,7 +36,7 @@
     bind:this={component}
 >
     <div class="flex items-center gap-3 w-full place-content-between">
-      <p class="text-base md:text-3xl">{header}</p>
+        <p class="text-base md:text-3xl">{header}</p>
         <button
             id="collapse-button"
             class="ti ti-chevron-up self-end text-base md:text-3xl transition-transform duration-200 ease-in-out"
@@ -74,10 +72,6 @@
     }
     :global(pre) {
         @apply w-full max-w-md;
-
-        @media (min-width: 768px) {
-            width: fit-content;
-        }
     }
     :global(code) {
         @apply rounded-md text-base;
