@@ -33,19 +33,19 @@
         </p>
         <div class="flex items-center text-2xl md:text-3xl gap-4">
             <button
-                class="ti ti-brand-github p-1 rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-md"
+                class="ti ti-brand-github p-1 rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-md transition-all duration-300 ease-in-out"
                 title="Go to github repository"
                 on:click={() =>
                     goto("https://github.com/MordechaiHadad/svelte-complete")}
             ></button>
             <button
                 id="theme-button"
-                class="ti p-1 rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-md"
+                class="ti p-1 rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-md transition-all duration-300 ease-in-out"
                 title="Toggle between dark/light theme"
                 on:click={() => themeHandler.toggle()}
             ></button>
             <button
-                class="ti ti-text-direction-rtl p-1 rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-md"
+                class="ti ti-text-direction-rtl p-1 rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-md transition-all duration-300 ease-in-out"
                 title="Toggle between LTR/RTL"
             ></button>
         </div>
