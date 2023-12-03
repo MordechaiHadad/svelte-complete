@@ -16,10 +16,8 @@
     export let setItemsOnFocus = async (): Promise<any[]> => {
         return [];
     };
-    export let sort:
-        | "ascend"
-        | "descend"
-        | ((a: any, b: any) => number) = "ascend";
+    export let sort: "ascend" | "descend" | ((a: any, b: any) => number) =
+        "ascend";
     export let highlightCharacters: "matched" | "unmatched" = "matched";
     export let displayField = "";
     export let textAlignment: "left" | "center" | "right" = "left";
@@ -244,6 +242,9 @@
         top: 50%;
         right: 0.5rem;
         user-select: none;
+        transition-property: transform;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 200ms;
     }
     :global(.suggestions-list) {
         display: flex;
