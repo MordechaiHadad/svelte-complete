@@ -7,13 +7,19 @@
 
     let themeHandler: ThemeHandler;
     let darkThemeButton: HTMLButtonElement;
+    let dirButton: HTMLButtonElement;
     let textDirection: "ltr" | "rtl" = "ltr";
 
     function toggleTextDir() {
         if (textDirection === "ltr") {
+            dirButton.classList.remove("ti-text-direction-rtl");
+            console.table(dirButton.classList);
+            dirButton.classList.add("ti-text-direction-ltr");
             textDirection = "rtl";
             return;
         }
+        dirButton.classList.remove("ti-text-direction-ltr");
+        dirButton.classList.add("ti-text-direction-rtl");
         textDirection = "ltr";
     }
 
@@ -55,6 +61,7 @@
             ></button>
             <button
                 class="ti ti-text-direction-rtl p-1 rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-md transition-all duration-300 ease-in-out"
+                bind:this={dirButton}
                 title="Toggle between LTR/RTL"
                 on:click={toggleTextDir}
             ></button>
