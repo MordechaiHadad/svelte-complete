@@ -35,7 +35,7 @@
 </svelte:head>
 
 <div
-    class="card shadow-card-shadow-light dark:shadow-card-shadow-dark p-4 md:p-6"
+    class="card shadow-card-shadow-light dark:shadow-card-shadow-dark p-4 md:p-6 border-neutral-200 dark:border-neutral-800"
     bind:this={component}
 >
     <div class="flex items-center gap-3 w-full place-content-between">
@@ -84,7 +84,7 @@
         @apply rounded-md text-base;
     }
     .card {
-        @apply w-full flex flex-col gap-4 items-center rounded-lg;
+        @apply w-full flex flex-col gap-4 items-center rounded-lg border;
     }
     .collapsed-icon {
         transform: rotate(180deg);

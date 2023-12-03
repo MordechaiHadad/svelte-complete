@@ -11,7 +11,6 @@ export class ThemeHandler {
     }
 
     toggle() {
-        console.log(this.isDark);
         this.isDark = !this.isDark;
         document.documentElement.classList.toggle("dark", this.isDark);
 
