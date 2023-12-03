@@ -13,7 +13,6 @@
     function toggleTextDir() {
         if (textDirection === "ltr") {
             dirButton.classList.remove("ti-text-direction-rtl");
-            console.table(dirButton.classList);
             dirButton.classList.add("ti-text-direction-ltr");
             textDirection = "rtl";
             return;
