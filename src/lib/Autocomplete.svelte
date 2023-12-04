@@ -9,6 +9,7 @@
         returnNewValue,
         sortItems,
     } from "./modules.js";
+    import { text } from "@sveltejs/kit";
 
     export let items: string[] | object[] = [];
     export let noResultsMessage = "No results found";
@@ -22,9 +23,16 @@
     export let displayField = "";
     export let textDirection: "ltr" | "rtl" = "ltr";
     export let textAlignment: "left" | "center" | "right" =
-        textDirection === "ltr" ? "left" : "right";
+    textDirection === "ltr" ? "left" : "right";
+    const explicitTextAlignment = textAlignment;
+    let isInitialized = false;
 
-    $: textAlignment = textDirection === "ltr" ? "left" : "right";
+    $: {
+        if (isInitialized) {
+            textAlignment = textDirection === "ltr" ? "left" : "right";
+        }
+        isInitialized = true;
+    }
 
     let containerElement: HTMLDivElement;
     let inputElement: HTMLInputElement;
@@ -135,7 +143,7 @@
 
 <div
     class="autocomplete-container"
-    dir="{textDirection}"
+    dir={textDirection}
     id="autocomplete-container"
     use:clickOutside
     on:click-outside={() => (showSuggestionsDiv = false)}
@@ -150,7 +158,6 @@
         bind:value
         bind:this={inputElement}
         on:focus={async () => {
-            console.log(textAlignment);
             showSuggestionsDiv = true;
             const result = await setItemsOnFocus();
 
@@ -179,7 +186,7 @@
             {#each results as item, i}
                 <button
                     class="suggestion"
-                    style="text-align: {textAlignment};"
+                    style="text-align: {explicitTextAlignment === "center" ? explicitTextAlignment : textAlignment};"
                     tabindex="-1"
                     on:click={() => {
                         value = returnNewValue(item, displayField);
