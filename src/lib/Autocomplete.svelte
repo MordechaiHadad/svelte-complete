@@ -230,7 +230,7 @@
         --autocomplete-suggestions-list-background-color: rgb(255 255 255);
         --autocomplete-input-icon-color: var(--autocomplete-text-color);
         --autocomplete-suggestion-color: var(--autocomplete-text-color);
-        --autocomplete-no-results-text--color: rgb(38 38 38);
+        --autocomplete-no-results-text--color: rgb(64 64 64);
     }
     :global(.autocomplete-container) {
         position: relative;
