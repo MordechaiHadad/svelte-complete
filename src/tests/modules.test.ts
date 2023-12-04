@@ -1,6 +1,6 @@
 import { sortItems } from "$lib/modules.js";
-import { it, expect, describe} from "vitest"
+import { it, expect, describe, test} from "vitest"
 
-it("Is work?", () => {
+test("Is work?", () => {
     expect("hi").toEqual("hi");
 })
