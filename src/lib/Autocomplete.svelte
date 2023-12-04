@@ -24,6 +24,8 @@
     export let textAlignment: "left" | "center" | "right" =
         textDirection === "ltr" ? "left" : "right";
 
+    $: textAlignment = textDirection === "ltr" ? "left" : "right";
+
     let containerElement: HTMLDivElement;
     let inputElement: HTMLInputElement;
 
@@ -123,10 +125,6 @@
         if (sort && items.length > 0) {
             items = sortItems(items, sort);
         }
-
-        if (textDirection === "rtl") {
-            containerElement.setAttribute("dir", "rtl");
-        }
     });
 </script>
 
@@ -137,6 +135,7 @@
 
 <div
     class="autocomplete-container"
+    dir="{textDirection}"
     id="autocomplete-container"
     use:clickOutside
     on:click-outside={() => (showSuggestionsDiv = false)}
@@ -151,6 +150,7 @@
         bind:value
         bind:this={inputElement}
         on:focus={async () => {
+            console.log(textAlignment);
             showSuggestionsDiv = true;
             const result = await setItemsOnFocus();
 
