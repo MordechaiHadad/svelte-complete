@@ -92,7 +92,7 @@ const textAlignment: cardTemplate = {
   let items = ["apple", "banana", "orange"];
 <\/script>
 
-<Autocomplete {items} textAlignment={"center"} \/>`,
+<Autocomplete {items} textAlignment="center" \/>`,
     items: ["apple", "banana", "orange"],
     displayField: "",
     sort: "ascend",
