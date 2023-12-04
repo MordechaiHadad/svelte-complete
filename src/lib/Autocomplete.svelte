@@ -209,7 +209,7 @@
                     {/if}</button
                 >
             {:else}
-                <p>{noResultsMessage}</p>
+                <p class="no-results">{noResultsMessage}</p>
             {/each}
         </div>
     {/if}
@@ -230,6 +230,7 @@
         --autocomplete-suggestions-list-background-color: rgb(255 255 255);
         --autocomplete-input-icon-color: var(--autocomplete-text-color);
         --autocomplete-suggestion-color: var(--autocomplete-text-color);
+        --autocomplete-no-results-text--color: rgb(38 38 38);
     }
     :global(.autocomplete-container) {
         position: relative;
@@ -284,6 +285,11 @@
     }
     :global(.suggestion) {
         color: var(--autocomplete-suggestion-color);
+        border-radius: 0.375rem;
+        padding: 0.5rem;
+    }
+    :global(.no-results) {
+        color: var(--autocomplete-no-results-text-color);
         border-radius: 0.375rem;
         padding: 0.5rem;
     }
