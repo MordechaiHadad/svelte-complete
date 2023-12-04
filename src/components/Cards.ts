@@ -85,14 +85,14 @@ const sorts: cardTemplate = {
 const textAlignment: cardTemplate = {
     header: "Suggestions list text alignments",
     description:
-        "Your suggestions list items can have three different alignments: left (default), right, and center.",
+        "Your suggestions list items can have three different alignments: left (default), right, and center. Keep in mind that when using left alignment and then enabling RTL, the alignment will become right, but if the specified text alignment is center, the text alignment change due to RTL won't go into effect.",
     code: `<script>
   import Autocomplete from "svelte-complete";
 
   let items = ["apple", "banana", "orange"];
 <\/script>
 
-<Autocomplete {items} textAlignment={"center"} \/>`,
+<Autocomplete {items} textAlignment="center" \/>`,
     items: ["apple", "banana", "orange"],
     displayField: "",
     sort: "ascend",

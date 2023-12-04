@@ -37,15 +37,15 @@
     class="text-neutrl-900 dark:text-neutral-100 pb-8 flex flex-col items-center justify-center gap-6"
 >
     <div
-        class="flex gap-4 flex-col items-center justify-center md:flex-row md:gap-8 w-full sticky top-0 bg-neutral-100/60 dark:bg-neutral-900/60 backdrop-blur z-50 py-4"
+        class="flex gap-4 flex-col items-center justify-center md:justify-between md:px-32 md:flex-row md:gap-8 w-full sticky top-0 bg-neutral-100/60 dark:bg-neutral-900/60 backdrop-blur z-50 py-4"
     >
-        <div
+        <!-- <div
             class="hidden w-[calc(24px+theme(gap.3)+theme(fontSize.3xl.0))] md:block"
-        ></div>
+        ></div> -->
         <p class="text-3xl md:text-4xl font-bold">
             <span class="text-svelte-brand">Svelte</span> Complete
         </p>
-        <div class="flex items-center text-2xl md:text-3xl gap-4">
+        <div class="flex items-center text-2xl gap-4">
             <button
                 class="ti ti-brand-github p-1 rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-800 shadow-neutral-300 dark:shadow-neutral-700 hover:shadow-md transition-all duration-300 ease-in-out"
                 title="Go to github repository"
