@@ -9,7 +9,6 @@
         returnNewValue,
         sortItems,
     } from "./modules.js";
-    import { text } from "@sveltejs/kit";
 
     export let items: string[] | object[] = [];
     export let noResultsMessage = "No results found";
