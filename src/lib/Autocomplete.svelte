@@ -23,7 +23,7 @@
     export let displayField = "";
     export let textDirection: "ltr" | "rtl" = "ltr";
     export let textAlignment: "left" | "center" | "right" =
-    textDirection === "ltr" ? "left" : "right";
+        textDirection === "ltr" ? "left" : "right";
     const explicitTextAlignment = textAlignment;
     let isInitialized = false;
 
@@ -174,19 +174,29 @@
             await setAllInactive();
         }}
     />
-    <span
+    <button
         class="material-symbols-outlined autocomplete-input-icon"
         style={textDirection == "rtl" ? "left: 0.5rem" : "right: 0.5rem"}
         tabindex="-1"
+        on:click={async () => {
+            showSuggestionsDiv = true;
+            const result = await setItemsOnFocus();
+
+            if (items.length === 0 && result.length > 0) {
+                items = sortItems(result, sort);
+            }
+        }}
     >
         expand_more
-    </span>
+    </button>
     {#if showSuggestionsDiv}
         <div id="suggestions-list" class="suggestions-list">
             {#each results as item, i}
                 <button
                     class="suggestion"
-                    style="text-align: {explicitTextAlignment === "center" ? explicitTextAlignment : textAlignment};"
+                    style="text-align: {explicitTextAlignment === 'center'
+                        ? explicitTextAlignment
+                        : textAlignment};"
                     tabindex="-1"
                     on:click={() => {
                         value = returnNewValue(item, displayField);
