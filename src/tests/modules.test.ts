@@ -84,7 +84,6 @@ describe("boldMatchedChars function tests", () => {
 
     test("some characters match", () => {
         const result = boldMatchedChars("testing", "test");
-        console.log(result);
         expect(result).toBe("<b>test</b>ing");
     });
 
