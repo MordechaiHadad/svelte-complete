@@ -185,6 +185,7 @@
             if (items.length === 0 && result.length > 0) {
                 items = sortItems(result, sort);
             }
+            inputElement.focus(); // steal focus yay
         }}
     >
         expand_more
