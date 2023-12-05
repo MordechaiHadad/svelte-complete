@@ -6,8 +6,8 @@ export function sortItems(
         return x.sort(sort);
     } else if (x.every((i) => typeof i === "string")) {
         return sort === "ascend"
-        ? x.sort()
-        : x.sort((a: string, b: string) => b.localeCompare(a));
+            ? x.sort()
+            : x.sort((a: string, b: string) => b.localeCompare(a));
     }
 
     return x;
