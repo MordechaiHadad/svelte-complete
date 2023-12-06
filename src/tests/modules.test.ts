@@ -25,15 +25,15 @@ describe("sortItems function tests", () => {
     test("should sort object array with custom sort function", () => {
         const input = [{ value: 2 }, { value: 1 }, { value: 3 }];
         const expected = [{ value: 1 }, { value: 2 }, { value: 3 }];
-        const result = sortItems(input, (a, b) => a.value - b.value);
-        expect(result).toEqual(expected);
+        sortItems(input, (a, b) => a.value - b.value);
+        expect(input).toEqual(expected);
     });
 
     test("should return empty array when input is empty", () => {
         const input: string[] = [];
         const expected: string[] = [];
-        const result = sortItems(input, "ascend");
-        expect(result).toEqual(expected);
+        sortItems(input, "ascend");
+        expect(input).toEqual(expected);
     });
 });
 
