@@ -11,15 +11,15 @@ describe("sortItems function tests", () => {
     test("should sort string array in ascending order", () => {
         const input = ["b", "a", "c"];
         const expected = ["a", "b", "c"];
-        const result = sortItems(input, "ascend");
-        expect(result).toEqual(expected);
+        sortItems(input, "ascend");
+        expect(input).toEqual(expected);
     });
 
     test("should sort string array in descending order", () => {
         const input = ["b", "a", "c"];
         const expected = ["c", "b", "a"];
-        const result = sortItems(input, "descend");
-        expect(result).toEqual(expected);
+        sortItems(input, "descend");
+        expect(input).toEqual(expected);
     });
 
     test("should sort object array with custom sort function", () => {

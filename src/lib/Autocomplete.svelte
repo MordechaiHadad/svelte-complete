@@ -15,7 +15,7 @@
     export let value = "";
     export let setItemsOnFocus = async (): Promise<any[]> => {
         return [];
-    };
+    }; // This function basically sets items not on instantiation of autocomplete but rather when input element gets focused.
     export let sort: "ascend" | "descend" | ((a: any, b: any) => number) =
         "ascend";
     export let highlightCharacters: "matched" | "unmatched" = "matched";
@@ -130,7 +130,7 @@
 
     onMount(() => {
         if (sort && items.length > 0) {
-            items = sortItems(items, sort);
+            sortItems(items, sort);
         }
     });
 </script>
@@ -158,17 +158,15 @@
         bind:this={inputElement}
         on:focus={async () => {
             showSuggestionsDiv = true;
-            const result = await setItemsOnFocus();
 
-            if (items.length === 0 && result.length > 0) {
-                items = sortItems(result, sort);
-            }
+            let result = await setItemsOnFocus();
+            if (result.length > 0) items = await setItemsOnFocus();
+
+            if (result.length > 0) sortItems(items, sort);
         }}
         on:keydown={keydownHandler}
         on:input={async () => {
-            if (!showSuggestionsDiv) {
-                showSuggestionsDiv = true;
-            }
+            if (!showSuggestionsDiv) showSuggestionsDiv = true;
 
             await setAllInactive();
         }}
@@ -179,11 +177,12 @@
         tabindex="-1"
         on:click={async () => {
             showSuggestionsDiv = true;
-            const result = await setItemsOnFocus();
 
-            if (items.length === 0 && result.length > 0) {
-                items = sortItems(result, sort);
-            }
+            let result = await setItemsOnFocus();
+            if (result.length > 0) items = await setItemsOnFocus();
+
+            if (result.length > 0) sortItems(items, sort);
+
             inputElement.focus(); // steal focus yay
         }}
     >

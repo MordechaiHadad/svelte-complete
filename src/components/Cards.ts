@@ -33,7 +33,7 @@ const objects: cardTemplate = {
   import Autocomplete from "svelte-complete";
 
 	const items = [
-		{ name: "Succes", id: 0},
+		{ name: "Success", id: 0},
 		{ name: "Warning", id: 1},
 		{ name: "Error", id: 2},
     	{ name: "Nice", id: 69 },
@@ -42,7 +42,7 @@ const objects: cardTemplate = {
 
 <Autocomplete {items} displayField="name" \/>`,
     items: [
-        { name: "Succes", id: 0 },
+        { name: "Success", id: 0 },
         { name: "Warning", id: 1 },
         { name: "Error", id: 2 },
         { name: "Nice", id: 69 },
@@ -60,7 +60,7 @@ const sorts: cardTemplate = {
   import Autocomplete from "svelte-complete";
 
 	const items = [
-		{ name: "Succes", id: 0},
+		{ name: "Success", id: 0},
 		{ name: "Warning", id: 1},
 		{ name: "Error", id: 2},
     	{ name: "Nice", id: 69 },
@@ -71,7 +71,7 @@ const sorts: cardTemplate = {
 
 <Autocomplete {items} {sort} displayField="name" \/>`,
     items: [
-        { name: "Succes", id: 0 },
+        { name: "Success", id: 0 },
         { name: "Warning", id: 1 },
         { name: "Error", id: 2 },
         { name: "Nice", id: 69 },
