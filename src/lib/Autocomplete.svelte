@@ -238,7 +238,7 @@
         );
         --autocomplete-suggestions-list-background-color: rgb(255 255 255);
         --autocomplete-input-icon-color: var(--autocomplete-text-color);
-        --autocomplete-suggestion-color: var(--autocomplete-text-color);
+        --autocomplete-suggestion-text-color: var(--autocomplete-text-color);
         --autocomplete-no-results-text--color: rgb(64 64 64);
     }
     :global(.autocomplete-container) {
@@ -293,7 +293,7 @@
         color: var(--autocomplete-text-color);
     }
     :global(.suggestion) {
-        color: var(--autocomplete-suggestion-color);
+        color: var(--autocomplete-suggestion-text-color);
         border-radius: 0.375rem;
         padding: 0.5rem;
     }

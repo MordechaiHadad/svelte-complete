@@ -34,3 +34,22 @@ Work in progress.
 | **textAlignment**       | "left", "center", or "right"                         | Align the text of the suggestions in the suggestions list                                                                                                    | Based on `textDirection`, if it's set to `"ltr"` it will be `"left"` and vice versa |
 | **textDirection**       | "ltr", or "rtl"                                        | Use this property if you want to use the autocomplete in RTL mode                                                                                            | `"ltr"`                                                                             |
 | **value**               | string                                                | The currently selected value                                                                                                                                 | `Empty string`                                                                      |
+
+---
+
+### Component CSS Variables
+
+| CSS Variable Name                                 | Description                                                  | Default Value                    |
+|---------------------------------------------------|--------------------------------------------------------------|----------------------------------|
+| --autocomplete-active-suggestion-background-color | Sets background color for an active/hovered suggestion       | `rgb(59 130 246 / 0.2)`          |
+| --autocomplete-container-height                   | Sets the height for the autocomplete component               | `fit-content`                    |
+| --autocomplete-container-width                    | Sets the width for the autocomplete component                | `fit-content`                    |
+| --autocomplete-input-focus-border-color           | Sets the border color when the autocomplete input is focused | `rgb(59 130 246)`                |
+| --autocomplete-input-icon-color                   | Sets the color for the icon in the input box                 | `var(--autocomplete-text-color)` |
+| --autocomplete-input-width                        | Sets the width for the input box                             | `15rem`                          |
+| --autocomplete-input-x-padding                    | Sets the x axis padding for the input box                    | `0.5rem`                         |
+| --autocomplete-input-y-padding                    | Sets the x axis padding for the input box                    | `0.5rem`                         |
+| --autocomplete-no-results-text--color             | Sets the text color for the no results message               | ` rgb(64 64 64)`                 |
+| --autocomplete-suggestion-text-color              | Sets the text color for a suggestion                         | `var(--autocomplete-text-color)` |
+| --autocomplete-suggestions-list-background-color  | Sets the background color for the suggestions list           | `rgb(255 255 255)`               |
+| --autocomplete-text-color                         | Sets the general text color for the autocomplete container   | `rgb(23 23 23)`                  |
