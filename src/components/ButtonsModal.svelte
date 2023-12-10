@@ -35,7 +35,7 @@
     <!-- Modal overlay -->
     <button
         class="fixed w-full h-full bg-neutral-200 dark:bg-neutral-800 opacity-50"
-        on:click={() => isButtonModalShown = !isButtonModalShown}
+        on:click={() => (isButtonModalShown = !isButtonModalShown)}
     />
 
     <!-- Modal content -->
@@ -73,7 +73,9 @@
                 title="Toggle between dark/light theme"
             ></Button>
             <Button
-                icon="ti-text-direction-{textDirection === "rtl" ? "ltr" : "rtl"}"
+                icon="ti-text-direction-{textDirection === 'rtl'
+                    ? 'ltr'
+                    : 'rtl'}"
                 bind:button={dirButton}
                 title="Toggle between LTR/RTL"
                 callback={toggleTextDir}
