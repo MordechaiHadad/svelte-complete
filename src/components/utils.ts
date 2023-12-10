@@ -14,7 +14,9 @@ export class ThemeHandler {
         this.isDark = !this.isDark;
         document.documentElement.classList.toggle("dark", this.isDark);
 
-        this.darkThemeButton.classList.remove(this.isDark ? "ti-moon" : "ti-sun");
+        this.darkThemeButton.classList.remove(
+            this.isDark ? "ti-moon" : "ti-sun"
+        );
         this.darkThemeButton.classList.add(this.isDark ? "ti-sun" : "ti-moon");
     }
 

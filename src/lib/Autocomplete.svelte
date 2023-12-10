@@ -9,6 +9,7 @@
         returnNewValue,
         sortItems,
     } from "./modules.js";
+    import { slide } from "svelte/transition";
 
     export let items: string[] | object[] = [];
     export let noResultsMessage = "No results found";
@@ -189,7 +190,7 @@
         expand_more
     </button>
     {#if showSuggestionsDiv}
-        <div id="suggestions-list" class="suggestions-list">
+        <div id="suggestions-list" class="suggestions-list" transition:slide>
             {#each results as item, i}
                 <button
                     class="suggestion"
@@ -240,6 +241,7 @@
         --autocomplete-input-icon-color: var(--autocomplete-text-color);
         --autocomplete-suggestion-text-color: var(--autocomplete-text-color);
         --autocomplete-no-results-text--color: rgb(64 64 64);
+        --autocomplete-suggestions-list-z-index: 10;
     }
     :global(.autocomplete-container) {
         position: relative;
@@ -285,7 +287,7 @@
         margin-top: 0.25rem;
         right: 0px;
         left: 0px;
-        z-index: 50;
+        z-index: var(--autocomplete-suggestions-list-z-index);
         background-color: var(--autocomplete-suggestions-list-background-color);
         overflow-y: auto;
         overflow-x: hidden;
