@@ -73,7 +73,7 @@
                 title="Toggle between dark/light theme"
             ></Button>
             <Button
-                icon="ti-text-direction-rtl"
+                icon="ti-text-direction-{textDirection === "rtl" ? "ltr" : "rtl"}"
                 bind:button={dirButton}
                 title="Toggle between LTR/RTL"
                 callback={toggleTextDir}
