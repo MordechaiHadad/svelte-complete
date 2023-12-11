@@ -41,7 +41,7 @@
     <!-- Modal content -->
     <div
         class="bg-neutral-100 dark:bg-neutral-900 absolute top-4 left-5 right-5 rounded-lg shadow-lg flex flex-col p-6 gap-5"
-        transition:fade
+        transition:fade={{ duration: 200 }}
     >
         <div
             class="flex justify-between border-b pb-5 border-neutral-300 dark:border-neutral-700"
@@ -51,7 +51,6 @@
             >
                 <button>Examples</button>
                 <button>Properties</button>
-                <button>GitHub</button>
             </div>
             <Button
                 icon="ti-x"

@@ -25,10 +25,10 @@
 
     <div class="items-center gap-4 hidden md:flex">
         <div
-            class="flex text-lg font-semibold gap-4 text-neutral-700 dark:text-neutral-300"
+            class="flex text-lg font-semibold gap-4 text-neutral-600 dark:text-neutral-400"
         >
-            <button>Examples</button>
-            <button>Properties</button>
+            <button class="text-neutral-700 dark:text-neutral-300">Examples</button>
+            <button class="dark:hover:text-neutral-300">Properties</button>
         </div>
         <div
             class="flex gap-4 border-l pl-4 border-neutral-300 dark:border-neutral-700"
