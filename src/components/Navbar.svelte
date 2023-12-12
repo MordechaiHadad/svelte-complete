@@ -36,12 +36,12 @@
                 bind:activeTabIndex
                 tabIndex={0}
             ></TabButton>
-            <TabButton
+            <!-- <TabButton
                 content="Properties"
                 title="Switch to properties tab"
                 bind:activeTabIndex
                 tabIndex={1}
-            ></TabButton>
+            ></TabButton> -->
         </div>
         <div
             class="flex gap-4 border-l pl-4 border-neutral-300 dark:border-neutral-700"

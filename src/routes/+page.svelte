@@ -4,6 +4,7 @@
     import Navbar from "../components/Navbar.svelte";
     import ButtonsModal from "../components/ButtonsModal.svelte";
     import ExamplesTab from "../components/ExamplesTab.svelte";
+    import PropertiesTab from "../components/PropertiesTab.svelte";
 
     let themeHandler: ThemeHandler;
     let darkThemeButton: HTMLButtonElement;
@@ -57,5 +58,7 @@
     ></Navbar>
     {#if activeTabIndex === 0}
         <ExamplesTab bind:textDirection {themeHandler}></ExamplesTab>
-    {:else if activeTabIndex === 1}{/if}
+    {:else if activeTabIndex === 1}
+    <PropertiesTab></PropertiesTab>
+    {/if}
 </div>

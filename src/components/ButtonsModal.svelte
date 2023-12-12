@@ -55,12 +55,12 @@
                     title="Switch to examples tab"
                     bind:activeTabIndex
                 ></TabButton>
-                <TabButton
+                <!-- <TabButton
                     content="Properties"
                     tabIndex={1}
                     title="Switch to properties tab"
                     bind:activeTabIndex
-                ></TabButton>
+                ></TabButton> -->
             </div>
             <Button
                 icon="ti-x"
@@ -90,12 +90,5 @@
                 callback={toggleTextDir}
             ></Button>
         </div>
-        <!-- <div class="flex flex-col gap-5">
-            <div class="flex justify-between w-full items-center">
-                <p>Switch theme</p>
-                <button class="flex gap-2 p-2 items-center border border-neutral-300 dark:border-neutral-700 rounded-md"><span class="ti ti-sun"></span>Dark<span class="ti ti-chevron-down"></span></button>
-            </div>
-            <button>Hello</button>
-        </div> -->
     </div>
 </div>
