@@ -4,12 +4,14 @@
     import Button from "./Button.svelte";
     import type { ThemeHandler } from "./utils.js";
     import { fade } from "svelte/transition";
+    import TabButton from "./TabButton.svelte";
 
     export let themeHandler: ThemeHandler;
     export let dirButton: HTMLButtonElement | null = null;
     export let textDirection: "ltr" | "rtl";
     export let toggleTextDir;
     export let isButtonModalShown: boolean;
+    export let activeTabIndex = 0;
     let darkThemeButton: HTMLButtonElement;
 
     const toggleTheme = () => {
@@ -46,11 +48,19 @@
         <div
             class="flex justify-between border-b pb-5 border-neutral-300 dark:border-neutral-700"
         >
-            <div
-                class="flex flex-col gap-5 items-start font-semibold text-neutral-700 dark:text-neutral-300"
-            >
-                <button>Examples</button>
-                <button>Properties</button>
+            <div class="flex flex-col gap-5 items-start font-semibold">
+                <TabButton
+                    content="Examples"
+                    tabIndex={0}
+                    title="Switch to examples tab"
+                    bind:activeTabIndex
+                ></TabButton>
+                <TabButton
+                    content="Properties"
+                    tabIndex={1}
+                    title="Switch to properties tab"
+                    bind:activeTabIndex
+                ></TabButton>
             </div>
             <Button
                 icon="ti-x"

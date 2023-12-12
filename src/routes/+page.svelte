@@ -1,16 +1,16 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import Card from "../components/Card.svelte";
-    import { cards } from "../components/Cards.js";
     import { ThemeHandler } from "../components/utils.js";
     import Navbar from "../components/Navbar.svelte";
     import ButtonsModal from "../components/ButtonsModal.svelte";
+    import ExamplesTab from "../components/ExamplesTab.svelte";
 
     let themeHandler: ThemeHandler;
     let darkThemeButton: HTMLButtonElement;
     let dirButton: HTMLButtonElement;
     let textDirection: "ltr" | "rtl" = "ltr";
     let isButtonModalShown = false;
+    let activeTabIndex = 0;
 
     function toggleTextDir() {
         if (textDirection === "ltr") {
@@ -53,20 +53,9 @@
         bind:textDirection
         {toggleTextDir}
         bind:isButtonModalShown
+        bind:activeTabIndex
     ></Navbar>
-    <div class="flex flex-col items-center w-full md:w-fit px-5 gap-8">
-        {#each cards as card}
-            <Card
-                {themeHandler}
-                header={card.header}
-                description={card.description}
-                code={card.code}
-                items={card.items}
-                displayField={card.displayField}
-                sort={card.sort}
-                textAlignment={card.textAlignment}
-                {textDirection}
-            ></Card>
-        {/each}
-    </div>
+    {#if activeTabIndex === 0}
+        <ExamplesTab bind:textDirection {themeHandler}></ExamplesTab>
+    {:else if activeTabIndex === 1}{/if}
 </div>
