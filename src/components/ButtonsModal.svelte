@@ -48,7 +48,7 @@
         <div
             class="flex justify-between border-b pb-5 border-neutral-300 dark:border-neutral-700"
         >
-            <div class="flex flex-col gap-5 items-start font-semibold">
+            <div class="flex flex-col gap-5 items-start justify-center font-semibold">
                 <TabButton
                     content="Examples"
                     tabIndex={0}
