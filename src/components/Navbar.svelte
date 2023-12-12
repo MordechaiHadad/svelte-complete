@@ -2,12 +2,15 @@
     import type { ThemeHandler } from "./utils.js";
     import { goto } from "$app/navigation";
     import Button from "./Button.svelte";
+    import TabButton from "./TabButton.svelte";
 
     export let themeHandler: ThemeHandler;
     export let dirButton: HTMLButtonElement;
     export let toggleTextDir;
     export let textDirection: "ltr" | "rtl";
     export let isButtonModalShown: boolean;
+
+    export let activeTabIndex = 0;
 </script>
 
 <div
@@ -20,15 +23,25 @@
         icon="ti-dots-vertical"
         title="open menu"
         class="md:hidden"
-        callback={() => {isButtonModalShown = !isButtonModalShown}}
+        callback={() => {
+            isButtonModalShown = !isButtonModalShown;
+        }}
     ></Button>
 
     <div class="items-center gap-4 hidden md:flex">
-        <div
-            class="flex text-lg font-semibold gap-4 text-neutral-700 dark:text-neutral-300"
-        >
-            <button>Examples</button>
-            <button>Properties</button>
+        <div class="flex gap-4">
+            <TabButton
+                content="Examples"
+                title="Switch to examples tab"
+                bind:activeTabIndex
+                tabIndex={0}
+            ></TabButton>
+            <!-- <TabButton
+                content="Properties"
+                title="Switch to properties tab"
+                bind:activeTabIndex
+                tabIndex={1}
+            ></TabButton> -->
         </div>
         <div
             class="flex gap-4 border-l pl-4 border-neutral-300 dark:border-neutral-700"

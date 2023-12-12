@@ -4,12 +4,14 @@
     import Button from "./Button.svelte";
     import type { ThemeHandler } from "./utils.js";
     import { fade } from "svelte/transition";
+    import TabButton from "./TabButton.svelte";
 
     export let themeHandler: ThemeHandler;
     export let dirButton: HTMLButtonElement | null = null;
     export let textDirection: "ltr" | "rtl";
     export let toggleTextDir;
     export let isButtonModalShown: boolean;
+    export let activeTabIndex = 0;
     let darkThemeButton: HTMLButtonElement;
 
     const toggleTheme = () => {
@@ -41,17 +43,24 @@
     <!-- Modal content -->
     <div
         class="bg-neutral-100 dark:bg-neutral-900 absolute top-4 left-5 right-5 rounded-lg shadow-lg flex flex-col p-6 gap-5"
-        transition:fade
+        transition:fade={{ duration: 200 }}
     >
         <div
             class="flex justify-between border-b pb-5 border-neutral-300 dark:border-neutral-700"
         >
-            <div
-                class="flex flex-col gap-5 items-start font-semibold text-neutral-700 dark:text-neutral-300"
-            >
-                <button>Examples</button>
-                <button>Properties</button>
-                <button>GitHub</button>
+            <div class="flex flex-col gap-5 items-start justify-center font-semibold">
+                <TabButton
+                    content="Examples"
+                    tabIndex={0}
+                    title="Switch to examples tab"
+                    bind:activeTabIndex
+                ></TabButton>
+                <!-- <TabButton
+                    content="Properties"
+                    tabIndex={1}
+                    title="Switch to properties tab"
+                    bind:activeTabIndex
+                ></TabButton> -->
             </div>
             <Button
                 icon="ti-x"
@@ -81,12 +90,5 @@
                 callback={toggleTextDir}
             ></Button>
         </div>
-        <!-- <div class="flex flex-col gap-5">
-            <div class="flex justify-between w-full items-center">
-                <p>Switch theme</p>
-                <button class="flex gap-2 p-2 items-center border border-neutral-300 dark:border-neutral-700 rounded-md"><span class="ti ti-sun"></span>Dark<span class="ti ti-chevron-down"></span></button>
-            </div>
-            <button>Hello</button>
-        </div> -->
     </div>
 </div>
