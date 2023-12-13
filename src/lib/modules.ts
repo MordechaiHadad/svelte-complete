@@ -22,14 +22,17 @@ export function display(displayField: string, item: any): string {
 export function boldUnmatchedChars(word: string, value: string) {
     let result = "";
     let i = 0;
+    let matched = false;
 
     let lowerWord = word.toLowerCase();
     let lowerValue = value.toLowerCase();
+
     while (i < lowerWord.length) {
         let slice = lowerWord.slice(i, i + lowerValue.length);
-        if (slice === lowerValue) {
+        if (!matched && slice === lowerValue) {
             result += word.slice(i, i + value.length);
             i += value.length;
+            matched = true;
         } else {
             result += `<b>${word[i]}</b>`;
             i++;
@@ -38,17 +41,21 @@ export function boldUnmatchedChars(word: string, value: string) {
     return result;
 }
 
+
 export function boldMatchedChars(word: string, value: string) {
     let result = "";
     let i = 0;
+    let matched = false;
 
     let lowerWord = word.toLowerCase();
     let lowerValue = value.toLowerCase();
+
     while (i < lowerWord.length) {
-        let slice = lowerWord.slice(i, i + lowerValue.length);
-        if (slice === lowerValue) {
+        let slice = lowerWord.slice(i);
+        if (!matched && slice.startsWith(lowerValue)) {
             result += `<b>${word.slice(i, i + value.length)}</b>`;
             i += value.length;
+            matched = true;
         } else {
             result += word[i];
             i++;
