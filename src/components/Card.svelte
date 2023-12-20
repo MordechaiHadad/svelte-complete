@@ -59,8 +59,13 @@
                 {items}
                 {displayField}
                 {sort}
-                {textAlignment}
                 {textDirection}
+                --autocomplete-suggestion-text-alignment={textAlignment ===
+                "center"
+                    ? textAlignment
+                    : textDirection === "rtl"
+                      ? "right"
+                      : "left"}
             />
             <Highlight language={html} {code} />
         </div>

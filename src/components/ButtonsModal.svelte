@@ -48,19 +48,21 @@
         <div
             class="flex justify-between border-b pb-5 border-neutral-300 dark:border-neutral-700"
         >
-            <div class="flex flex-col gap-5 items-start justify-center font-semibold">
+            <div
+                class="flex flex-col gap-5 items-start justify-center font-semibold"
+            >
                 <TabButton
                     content="Examples"
                     tabIndex={0}
                     title="Switch to examples tab"
                     bind:activeTabIndex
                 ></TabButton>
-                <!-- <TabButton
+                <TabButton
                     content="Properties"
                     tabIndex={1}
                     title="Switch to properties tab"
                     bind:activeTabIndex
-                ></TabButton> -->
+                ></TabButton>
             </div>
             <Button
                 icon="ti-x"

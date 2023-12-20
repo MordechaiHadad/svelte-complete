@@ -1,64 +1,124 @@
 export let componentProperties = [
-    {
-        property_name: "displayField",
-        type: "string",
-        description:
-            "When providing an object array displayField will be used to determine which field in the object will be displayed in the suggestions list",
-        default_value: "Empty string",
-    },
-    {
-        property_name: "highlightCharacters",
-        type: '"matched", or "unmatched"',
-        description:
-            "Will highlight the matching/non matching characters based on the input",
-        default_value: '"matched"',
-    },
-    {
-        property_name: "item",
-        type: "string[], or object[]",
-        description: "The list of items to be used by the autocomplete",
-        default_value: "Empty array",
-    },
-    {
-        property_name: "noResultsMessage",
-        type: "string",
-        description:
-            "The message to be displayed when no item matches the given input",
-        default_value: '"No results found"',
-    },
-    {
-        property_name: "setItemsOnFocus",
-        type: "() => Promise<any[]>",
-        description:
-            "A lambda that allows for setting the item array when the autocomplete component is focused instead of when it is instantiated",
-        default_value: "Returns an empty array",
-    },
-    {
-        property_name: "sort",
-        type: '"ascend", "descend", or ((a: any, b: any) => number)',
-        description:
-            "The sorting algorithm for the given items array, descend and ascend sorts only apply to a string array, for an objects array provide your own implementation",
-        default_value: '"ascend"',
-    },
-    {
-        property_name: "textAlignment",
-        type: '"left", "center", or "right"',
-        description:
-            "Align the text of the suggestions in the suggestions list",
-        default_value:
-            'Based on textDirection, if it\'s set to "ltr" it will be "left" and vice versa',
-    },
-    {
-        property_name: "textDirection",
-        type: '"ltr", or "rtl"',
-        description:
-            "Use this property if you want to use the autocomplete in RTL mode",
-        default_value: '"ltr"',
-    },
-    {
-        property_name: "value",
-        type: "string",
-        description: "The currently selected value",
-        default_value: "Empty string",
-    },
+    [
+        "displayField",
+        "string",
+        "When providing an object array displayField will be used to determine which field in the object will be displayed in the suggestions list",
+        "Empty string",
+    ],
+    [
+        "highlightCharacters",
+        '"matched", or "unmatched"',
+        "Will highlight the matching/non matching characters based on the input",
+        '"matched"',
+    ],
+    [
+        "item",
+        "string[], or object[]",
+        "The list of items to be used by the autocomplete",
+        "Empty array",
+    ],
+    [
+        "noResultsMessage",
+        "string",
+        "The message to be displayed when no item matches the given input",
+        '"No results found"',
+    ],
+    [
+        "setItemsOnFocus",
+        "() => Promise<any[]>",
+        "A lambda that allows for setting the item array when the autocomplete component is focused instead of when it is instantiated",
+        "Returns an empty array",
+    ],
+    [
+        "sort",
+        '"ascend", "descend", or ((a: any, b: any) => number)',
+        "The sorting algorithm for the given items array, descend and ascend sorts only apply to a string array, for an objects array provide your own implementation",
+        '"ascend"',
+    ],
+    [
+        "textDirection",
+        '"auto", "ltr", or "rtl"',
+        'Use this property if you want to use the autocomplete in RTL mode, not required if parent\'s dir is set to "rtl"',
+        '"auto"',
+    ],
+    ["value", "string", "The currently selected value", "Empty string"],
+];
+
+export let componentCSSVariables = [
+    [
+        "--autocomplete-active-suggestion-background-color",
+        "Sets background color for an active/hovered suggestion",
+        "rgb(115 115 115 / 0.2)",
+    ],
+    [
+        "--autocomplete-container-height",
+        "Sets the height for the autocomplete component",
+        "fit-content",
+    ],
+    [
+        "--autocomplete-container-width",
+        "Sets the width for the autocomplete component",
+        "fit-content",
+    ],
+    [
+        "--autocomplete-input-background-color",
+        "Sets the background color for the autocomplete input",
+        "rgb(250 250 250)",
+    ],
+    [
+        "--autocomplete-input-border-color",
+        "Sets the border color for the autocomplete input",
+        "rgb(115 115 115)",
+    ],
+    [
+        "--autocomplete-input-border-width",
+        "Sets the border width for the autocomplete input",
+        "1px",
+    ],
+    [
+        "--autocomplete-input-icon-color",
+        "Sets the color for the icon in the input box",
+        "var(--autocomplete-text-color)",
+    ],
+    ["--autocomplete-input-width", "Sets the width for the input box", "100%"],
+    [
+        "--autocomplete-input-x-padding",
+        "Sets the x axis padding for the input box",
+        "0.5rem",
+    ],
+    [
+        "--autocomplete-input-y-padding",
+        "Sets the y axis padding for the input box",
+        "0.5rem",
+    ],
+    [
+        "--autocomplete-no-results-text--color",
+        "Sets the text color for the no results message",
+        "rgb(64 64 64)",
+    ],
+    [
+        "--autocomplete-suggestion-text-alignment",
+        "Sets the text alignment for a suggestion",
+        '"left"',
+    ],
+    [
+        "--autocomplete-suggestion-text-color",
+        "Sets the text color for a suggestion",
+        "var(--autocomplete-text-color)",
+    ],
+    [
+        "--autocomplete-suggestions-list-background-color",
+        "Sets the background color for the suggestions list",
+        "rgb(250 250 250)",
+    ],
+    [
+        "--autocomplete-suggestions-list-z-index",
+        "Sets the z-index for the suggestions list",
+        "10",
+    ],
+    [
+        "--autocomplete-text-color",
+        "Sets the general text color for the autocomplete container",
+        "rgb(23 23 23)",
+    ],
 ];

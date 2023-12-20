@@ -46,6 +46,7 @@
             {toggleTextDir}
             bind:isButtonModalShown
             bind:textDirection
+            bind:activeTabIndex
         ></ButtonsModal>
     {/if}
     <Navbar

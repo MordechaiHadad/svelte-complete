@@ -21,21 +21,11 @@
         "ascend";
     export let highlightCharacters: "matched" | "unmatched" = "matched";
     export let displayField = "";
-    export let textDirection: "ltr" | "rtl" = "ltr";
-    export let textAlignment: "left" | "center" | "right" =
-        textDirection === "ltr" ? "left" : "right";
-    const explicitTextAlignment = textAlignment;
-    let isInitialized = false;
-
-    $: {
-        if (isInitialized) {
-            textAlignment = textDirection === "ltr" ? "left" : "right";
-        }
-        isInitialized = true;
-    }
+    export let textDirection: "ltr" | "rtl" | "auto" = "auto";
 
     let containerElement: HTMLDivElement;
     let inputElement: HTMLInputElement;
+    let suggestionsContainerElement: HTMLDivElement;
 
     // autocomplete stuff
     let showSuggestionsDiv = false;
@@ -74,28 +64,24 @@
 
         event.preventDefault();
 
-        const suggestionContainer = inputElement.parentElement?.querySelector(
-            "#suggestions-list"
-        ) as HTMLDivElement;
-
-        if (!suggestionContainer) {
+        if (!suggestionsContainerElement) {
             return;
         }
 
         const isArrowUp = event.key === "ArrowUp";
         const edgeIndex = isArrowUp
             ? 0
-            : suggestionContainer.children.length - 1;
+            : suggestionsContainerElement.children.length - 1;
 
         if (suggestionsIndex === edgeIndex) {
             suggestionsIndex = isArrowUp
-                ? suggestionContainer.children.length
+                ? suggestionsContainerElement.children.length
                 : -1;
         }
 
         const direction = isArrowUp ? -1 : 1;
         const activeSuggestionIndex = suggestionsIndex + direction;
-        const activeSuggestionElement = suggestionContainer.children[
+        const activeSuggestionElement = suggestionsContainerElement.children[
             activeSuggestionIndex
         ] as HTMLButtonElement;
 
@@ -149,33 +135,9 @@
     on:click-outside={() => (showSuggestionsDiv = false)}
     bind:this={containerElement}
 >
-    <input
-        id="autocomplete-input"
-        type="text"
-        class="autocomplete-input"
-        class:autocomplete-input-padding-lrt={textDirection === "ltr"}
-        class:autocomplete-input-padding-rtl={textDirection === "rtl"}
-        bind:value
-        bind:this={inputElement}
-        on:focus={async () => {
-            showSuggestionsDiv = true;
-
-            let result = await setItemsOnFocus();
-            if (result.length > 0) items = await setItemsOnFocus();
-
-            if (result.length > 0) sortItems(items, sort);
-        }}
-        on:keydown={keydownHandler}
-        on:input={async () => {
-            if (!showSuggestionsDiv) showSuggestionsDiv = true;
-
-            await setAllInactive();
-        }}
-    />
-    <button
-        class="material-symbols-outlined autocomplete-input-icon"
-        style={textDirection == "rtl" ? "left: 0.5rem" : "right: 0.5rem"}
-        tabindex="-1"
+    <div
+        class="autocomplete-input-container"
+        class:autocomplete-focused-input-container={showSuggestionsDiv}
         on:click={async () => {
             showSuggestionsDiv = true;
 
@@ -187,16 +149,44 @@
             inputElement.focus(); // steal focus yay
         }}
     >
-        expand_more
-    </button>
+        <input
+            id="autocomplete-input"
+            type="text"
+            class="autocomplete-input"
+            bind:value
+            bind:this={inputElement}
+            on:focus={async () => {
+                showSuggestionsDiv = true;
+
+                let result = await setItemsOnFocus();
+                if (result.length > 0) items = await setItemsOnFocus();
+
+                if (result.length > 0) sortItems(items, sort);
+            }}
+            on:keydown={keydownHandler}
+            on:input={async () => {
+                if (!showSuggestionsDiv) showSuggestionsDiv = true;
+
+                await setAllInactive();
+            }}
+        />
+        <button
+            class="material-symbols-outlined autocomplete-input-icon"
+            tabindex="-1"
+            class:autocomplete-collapsed-input-icon={showSuggestionsDiv}
+        >
+            expand_more
+        </button>
+    </div>
     {#if showSuggestionsDiv}
-        <div id="suggestions-list" class="suggestions-list" transition:slide>
+        <div
+            bind:this={suggestionsContainerElement}
+            class="suggestions-list"
+            transition:slide
+        >
             {#each results as item, i}
                 <button
                     class="suggestion"
-                    style="text-align: {explicitTextAlignment === 'center'
-                        ? explicitTextAlignment
-                        : textAlignment};"
                     tabindex="-1"
                     on:click={() => {
                         value = returnNewValue(item, displayField);
@@ -232,49 +222,57 @@
         --autocomplete-container-height: fit-content;
         --autocomplete-input-y-padding: 0.5rem;
         --autocomplete-input-x-padding: 0.5rem;
-        --autocomplete-input-width: 15rem;
-        --autocomplete-input-focus-border-color: rgb(59 130 246);
-        --autocomplete-active-suggestion-background-color: rgb(
-            59 130 246 / 0.2
-        );
-        --autocomplete-suggestions-list-background-color: rgb(255 255 255);
+        --autocomplete-input-width: 100%;
+        --autocomplete-active-suggestion-background-color: rgb(115 115 115 / 0.2);
+        --autocomplete-suggestions-list-background-color: rgb(250 250 250);
         --autocomplete-input-icon-color: var(--autocomplete-text-color);
         --autocomplete-suggestion-text-color: var(--autocomplete-text-color);
         --autocomplete-no-results-text--color: rgb(64 64 64);
         --autocomplete-suggestions-list-z-index: 10;
+        --autocomplete-input-background-color: rgb(250 250 250);
+        --autocomplete-suggestion-text-alignment: "left";
+        --autocomplete-input-border-width: 1px;
+        --autocomplete-input-border-color: rgb(115 115 115);
     }
     :global(.autocomplete-container) {
         position: relative;
         width: var(--autocomplete-container-width);
         height: var(--autocomplete-container-height);
     }
-    :global(.autocomplete-input) {
+    :global(.autocomplete-input-container) {
+        display: flex;
+        align-content: space-between;
+        background-color: var(--autocomplete-input-background-color);
         padding-top: var(--autocomplete-input-y-padding);
         padding-bottom: var(--autocomplete-input-y-padding);
-        width: var(--autocomplete-input-width);
-        border-radius: 0.375rem;
-        border-width: 1px;
-        outline: 2px solid transparent;
-        outline-offset: 2px;
-        color: var(--autocomplete-text-color);
-    }
-    :global(.autocomplete-input-padding-lrt) {
-        padding-right: calc(var(--autocomplete-input-x-padding) + 1.5rem);
         padding-left: var(--autocomplete-input-x-padding);
-    }
-    :global(.autocomplete-input-padding-rtl) {
-        padding-left: calc(var(--autocomplete-input-x-padding) + 1.5rem);
         padding-right: var(--autocomplete-input-x-padding);
+        border-radius: 0.375rem;
+        border-width: var(--autocomplete-input-border-width);
+        border-color: transparent;
+        width: var(--autocomplete-input-width);
     }
-    :global(.autocomplete-input:focus) {
-        border-color: var(--autocomplete-input-focus-border-color);
+    :global(.autocomplete-input-container:hover) {
+        cursor: text;
+    }
+    :global(.autocomplete-focused-input-container) {
+        border-color: var(--autocomplete-input-border-color);
+    }
+    :global(.autocomplete-input) {
+        width: 100%;
+        color: var(--autocomplete-text-color);
+        background-color: var(--autocomplete-input-background-color);
+        outline: none;
     }
     :global(.autocomplete-input-icon) {
         color: var(--autocomplete-input-icon-color);
-        transform: translateY(-50%);
-        position: absolute;
-        top: 50%;
         user-select: none;
+        transition-property: transform;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 200ms;
+    }
+    :global(.autocomplete-collapsed-input-icon) {
+        transform: rotate(180deg);
     }
     :global(.suggestions-list) {
         display: flex;
@@ -298,6 +296,7 @@
         color: var(--autocomplete-suggestion-text-color);
         border-radius: 0.375rem;
         padding: 0.5rem;
+        text-align: var(--autocomplete-suggestion-text-alignment);
     }
     :global(.no-results) {
         color: var(--autocomplete-no-results-text-color);

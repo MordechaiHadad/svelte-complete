@@ -16,7 +16,7 @@
 <div
     class="flex gap-4 items-center px-6 justify-between md:px-12 lg:px-32 md:gap-8 w-full sticky top-0 bg-neutral-100/60 dark:bg-neutral-900/60 backdrop-blur z-20 py-4 text-2xl"
 >
-    <p class="text-2xl md:text-4xl font-bold">
+    <p class="text-2xl md:text-4xl font-bold select-none">
         <span class="text-svelte-brand">Svelte</span> Complete
     </p>
     <Button
@@ -36,12 +36,12 @@
                 bind:activeTabIndex
                 tabIndex={0}
             ></TabButton>
-            <!-- <TabButton
+            <TabButton
                 content="Properties"
                 title="Switch to properties tab"
                 bind:activeTabIndex
                 tabIndex={1}
-            ></TabButton> -->
+            ></TabButton>
         </div>
         <div
             class="flex gap-4 border-l pl-4 border-neutral-300 dark:border-neutral-700"

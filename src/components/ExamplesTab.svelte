@@ -17,8 +17,8 @@
             items={card.items}
             displayField={card.displayField}
             sort={card.sort}
-            textAlignment={card.textAlignment}
             {textDirection}
+            textAlignment={card.textAlignment}
         ></Card>
     {/each}
 </div>
