@@ -298,6 +298,12 @@
         padding: 0.5rem;
         text-align: var(--autocomplete-suggestion-text-alignment);
     }
+    :global(.suggestion:dir(rtl)) {
+        text-align: right;
+    }
+    :global(.suggestion:dir(ltr)) {
+        text-align: left;
+    }
     :global(.no-results) {
         color: var(--autocomplete-no-results-text-color);
         border-radius: 0.375rem;
