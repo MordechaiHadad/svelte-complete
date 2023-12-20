@@ -230,7 +230,6 @@
         --autocomplete-no-results-text--color: rgb(64 64 64);
         --autocomplete-suggestions-list-z-index: 10;
         --autocomplete-input-background-color: rgb(250 250 250);
-        --autocomplete-suggestion-text-alignment: "left";
         --autocomplete-input-border-width: 1px;
         --autocomplete-input-border-color: rgb(115 115 115);
     }
@@ -296,13 +295,10 @@
         color: var(--autocomplete-suggestion-text-color);
         border-radius: 0.375rem;
         padding: 0.5rem;
-        text-align: var(--autocomplete-suggestion-text-alignment);
+        text-align: left;
     }
     :global(.suggestion:dir(rtl)) {
         text-align: right;
-    }
-    :global(.suggestion:dir(ltr)) {
-        text-align: left;
     }
     :global(.no-results) {
         color: var(--autocomplete-no-results-text-color);

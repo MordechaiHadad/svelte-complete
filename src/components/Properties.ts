@@ -97,11 +97,6 @@ export let componentCSSVariables = [
         "rgb(64 64 64)",
     ],
     [
-        "--autocomplete-suggestion-text-alignment",
-        "Sets the text alignment for a suggestion",
-        '"left"',
-    ],
-    [
         "--autocomplete-suggestion-text-color",
         "Sets the text color for a suggestion",
         "var(--autocomplete-text-color)",

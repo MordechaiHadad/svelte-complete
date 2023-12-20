@@ -53,7 +53,6 @@ Work in progress.
 | --autocomplete-input-x-padding                    | Sets the x axis padding for the input box                  | `0.5rem`                         |
 | --autocomplete-input-y-padding                    | Sets the y axis padding for the input box                  | `0.5rem`                         |
 | --autocomplete-no-results-text--color             | Sets the text color for the no results message             | `rgb(64 64 64)`                  |
-| --autocomplete-suggestion-text-alignment          | Sets the text alignment for a suggestion                   | `"left"`                         |
 | --autocomplete-suggestion-text-color              | Sets the text color for a suggestion                       | `var(--autocomplete-text-color)` |
 | --autocomplete-suggestions-list-background-color  | Sets the background color for the suggestions list         | `rgb(250 250 250)`               |
 | --autocomplete-suggestions-list-z-index           | Sets the z-index for the suggestions list                  | `10`                             |
