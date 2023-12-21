@@ -37,16 +37,17 @@
     class="card shadow-card-shadow-light dark:shadow-card-shadow-dark p-4 md:p-6 border-neutral-200 dark:border-neutral-800"
     bind:this={component}
 >
-    <div class="flex items-center gap-3 w-full place-content-between cursor-pointer" on:click={() => collapse()}>
+    <button
+        class="flex items-center gap-3 w-full place-content-between cursor-pointer"
+        on:click={() => collapse()}
+    >
         <p class="text-base md:text-3xl">{header}</p>
-        <button
+        <p
             id="collapse-button"
             class="ti ti-chevron-up self-end text-base md:text-3xl transition-transform duration-200 ease-in-out"
             class:collapsed-icon={isCollapsed}
-            on:click={() => collapse()}
-        >
-        </button>
-    </div>
+        ></p>
+    </button>
     {#if !isCollapsed}
         <p
             class="text-xs md:text-lg text-left w-full max-w-prose"
