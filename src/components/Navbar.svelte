@@ -9,7 +9,6 @@
     export let toggleTextDir;
     export let textDirection: "ltr" | "rtl";
     export let isButtonModalShown: boolean;
-
     export let activeTabIndex = 0;
 </script>
 
@@ -55,12 +54,14 @@
             <Button
                 id="theme-button"
                 callback={() => themeHandler.toggle()}
-                title="Toggle between dark/light theme"
+                title="Toggle between RTL/LTR text direction"
             ></Button>
             <Button
                 icon="ti-text-direction-rtl"
                 bind:button={dirButton}
-                title="Toggle between LTR/RTL"
+                title="Turn on {textDirection === 'rtl'
+                    ? 'LTR'
+                    : 'RTL'} text direction"
                 callback={toggleTextDir}
             ></Button>
         </div>

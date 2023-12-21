@@ -82,7 +82,12 @@
         @apply w-full max-w-md;
     }
     :global(code) {
-        @apply rounded-md text-base;
+        @apply rounded-md text-sm;
+
+        @media screen and (min-width: 768px) {
+            font-size: 1rem /* 16px */;
+            line-height: 1.5rem /* 24px */;
+        }
     }
     .card {
         @apply w-full flex flex-col gap-4 items-center rounded-lg border;

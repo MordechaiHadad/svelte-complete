@@ -139,6 +139,10 @@
         class="autocomplete-input-container"
         class:autocomplete-focused-input-container={showSuggestionsDiv}
         on:click={async () => {
+            if (showSuggestionsDiv && value === "") {
+                showSuggestionsDiv = false;
+                return;
+            }
             showSuggestionsDiv = true;
 
             let result = await setItemsOnFocus();
@@ -155,7 +159,11 @@
             class="autocomplete-input"
             bind:value
             bind:this={inputElement}
-            on:focus={async () => {
+            on:click|stopPropagation={async () => {
+                if (showSuggestionsDiv && value === "") {
+                    showSuggestionsDiv = false;
+                    return;
+                }
                 showSuggestionsDiv = true;
 
                 let result = await setItemsOnFocus();
@@ -223,7 +231,9 @@
         --autocomplete-input-y-padding: 0.5rem;
         --autocomplete-input-x-padding: 0.5rem;
         --autocomplete-input-width: 100%;
-        --autocomplete-active-suggestion-background-color: rgb(115 115 115 / 0.2);
+        --autocomplete-active-suggestion-background-color: rgb(
+            115 115 115 / 0.2
+        );
         --autocomplete-suggestions-list-background-color: rgb(250 250 250);
         --autocomplete-input-icon-color: var(--autocomplete-text-color);
         --autocomplete-suggestion-text-color: var(--autocomplete-text-color);
@@ -248,7 +258,7 @@
         padding-right: var(--autocomplete-input-x-padding);
         border-radius: 0.375rem;
         border-width: var(--autocomplete-input-border-width);
-        border-color: transparent;
+        border-color: var(--autocomplete-input-border-color);
         width: var(--autocomplete-input-width);
     }
     :global(.autocomplete-input-container:hover) {

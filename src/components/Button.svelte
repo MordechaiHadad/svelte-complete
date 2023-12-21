@@ -1,4 +1,5 @@
 <script lang="ts">
+
     export let icon: string = "";
     export let callback;
     export let title: string;
