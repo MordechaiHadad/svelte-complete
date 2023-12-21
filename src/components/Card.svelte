@@ -37,7 +37,7 @@
     class="card shadow-card-shadow-light dark:shadow-card-shadow-dark p-4 md:p-6 border-neutral-200 dark:border-neutral-800"
     bind:this={component}
 >
-    <div class="flex items-center gap-3 w-full place-content-between">
+    <div class="flex items-center gap-3 w-full place-content-between cursor-pointer" on:click={() => collapse()}>
         <p class="text-base md:text-3xl">{header}</p>
         <button
             id="collapse-button"
