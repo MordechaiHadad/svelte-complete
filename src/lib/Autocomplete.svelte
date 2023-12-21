@@ -22,6 +22,7 @@
     export let highlightCharacters: "matched" | "unmatched" = "matched";
     export let displayField = "";
     export let textDirection: "ltr" | "rtl" | "auto" = "auto";
+    export let readonly = false;
 
     let containerElement: HTMLDivElement;
     let inputElement: HTMLInputElement;
@@ -159,6 +160,7 @@
             class="autocomplete-input"
             bind:value
             bind:this={inputElement}
+            readonly={readonly}
             on:click|stopPropagation={async () => {
                 if (showSuggestionsDiv && value === "") {
                     showSuggestionsDiv = false;
