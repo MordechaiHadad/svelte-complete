@@ -117,6 +117,8 @@
     }
 
     async function toggleSuggestions() {
+        if (readonly) return;
+
         if (showSuggestionsDiv && value === "") {
             showSuggestionsDiv = false;
             return;
