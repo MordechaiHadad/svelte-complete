@@ -121,15 +121,20 @@
             showSuggestionsDiv = false;
             return;
         }
-        if (results.length === 1) results = items;
-        showSuggestionsDiv = true;
-
+        
         let result = await setItemsOnFocus();
         if (result.length > 0) items = await setItemsOnFocus();
-
+        
         if (result.length > 0) sortItems(items, sort);
-
+        
         inputElement.focus(); // steal focus yay
+        
+        if (results.length === 1) {
+            results = items;
+            inputElement.select();
+        }
+
+        showSuggestionsDiv = true;
     }
 
     onMount(() => {
