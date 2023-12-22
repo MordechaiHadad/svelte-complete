@@ -121,19 +121,15 @@
             showSuggestionsDiv = false;
             return;
         }
-        
+
         let result = await setItemsOnFocus();
         if (result.length > 0) items = await setItemsOnFocus();
-        
-        if (result.length > 0) sortItems(items, sort);
-        
-        inputElement.focus(); // steal focus yay
-        
-        if (results.length === 1) {
-            results = items;
-            inputElement.select();
-        }
 
+        if (result.length > 0) sortItems(items, sort);
+
+        inputElement.focus(); // steal focus yay
+
+        if (results.length === 1) results = items;
         showSuggestionsDiv = true;
     }
 
@@ -170,6 +166,7 @@
             bind:this={inputElement}
             {readonly}
             on:click|stopPropagation={toggleSuggestions}
+            on:focusin={() => inputElement.select()}
             on:keydown={keydownHandler}
             on:input={async () => {
                 if (!showSuggestionsDiv) showSuggestionsDiv = true;
