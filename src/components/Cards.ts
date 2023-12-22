@@ -55,7 +55,7 @@ const objects: cardTemplate = {
 const sorts: cardTemplate = {
     header: "Using different sorts",
     description:
-        "svelte-complete provides three different ways to sort your autocomplete items: ascend, descend, and a custom sorting function. Keep in mind that ascend and descend sorts only work for string arrays. For this example, we will implement the descend sort.",
+        "Svelte-complete provides three different ways to sort your autocomplete items: ascend, descend, and a custom sorting function. Keep in mind that ascend and descend sorts only work for string arrays. For this example, we will implement the descend sort.",
     code: `<script>
   import Autocomplete from "svelte-complete";
 
