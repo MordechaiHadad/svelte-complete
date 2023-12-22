@@ -52,7 +52,7 @@
     <div class="flex flex-col gap-6">
         <h1 class="text-xl md:text-2xl">Component Properties</h1>
         <div
-            class="max-w-xs max-h-xs overflow-auto lg:max-w-4xl lg:max-h-[32rem] rounded-md border border-neutral-500 dark:bg-neutral-500"
+            class="max-w-xs overflow-auto lg:max-w-4xl rounded-md border border-neutral-500 dark:bg-neutral-500"
         >
             <table id="props"></table>
         </div>
@@ -60,7 +60,7 @@
     <div class="flex flex-col gap-4">
         <h1 class="text-xl md:text-2xl">Component CSS Variables</h1>
         <div
-            class="max-w-xs max-h-xs overflow-auto lg:max-w-4xl lg:max-h-[32rem] rounded-md border border-neutral-500 dark:bg-neutral-500"
+            class="max-w-xs overflow-auto lg:max-w-4xl  rounded-md border border-neutral-500 dark:bg-neutral-500"
         >
             <table id="vars"></table>
         </div>
