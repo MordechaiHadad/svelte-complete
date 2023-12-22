@@ -116,6 +116,22 @@
         }
     }
 
+    async function toggleSuggestions() {
+        if (showSuggestionsDiv && value === "") {
+            showSuggestionsDiv = false;
+            return;
+        }
+        if (results.length === 1) results = items;
+        showSuggestionsDiv = true;
+
+        let result = await setItemsOnFocus();
+        if (result.length > 0) items = await setItemsOnFocus();
+
+        if (result.length > 0) sortItems(items, sort);
+
+        inputElement.focus(); // steal focus yay
+    }
+
     onMount(() => {
         if (sort && items.length > 0) {
             sortItems(items, sort);
@@ -139,20 +155,7 @@
     <div
         class="autocomplete-input-container"
         class:autocomplete-focused-input-container={showSuggestionsDiv}
-        on:click={async () => {
-            if (showSuggestionsDiv && value === "") {
-                showSuggestionsDiv = false;
-                return;
-            }
-            showSuggestionsDiv = true;
-
-            let result = await setItemsOnFocus();
-            if (result.length > 0) items = await setItemsOnFocus();
-
-            if (result.length > 0) sortItems(items, sort);
-
-            inputElement.focus(); // steal focus yay
-        }}
+        on:click={toggleSuggestions}
     >
         <input
             id="autocomplete-input"
@@ -160,19 +163,8 @@
             class="autocomplete-input"
             bind:value
             bind:this={inputElement}
-            readonly={readonly}
-            on:click|stopPropagation={async () => {
-                if (showSuggestionsDiv && value === "") {
-                    showSuggestionsDiv = false;
-                    return;
-                }
-                showSuggestionsDiv = true;
-
-                let result = await setItemsOnFocus();
-                if (result.length > 0) items = await setItemsOnFocus();
-
-                if (result.length > 0) sortItems(items, sort);
-            }}
+            {readonly}
+            on:click|stopPropagation={toggleSuggestions}
             on:keydown={keydownHandler}
             on:input={async () => {
                 if (!showSuggestionsDiv) showSuggestionsDiv = true;
@@ -244,8 +236,12 @@
         --autocomplete-input-background-color: rgb(250 250 250);
         --autocomplete-input-border-width: 1px;
         --autocomplete-input-border-color: rgb(115 115 115);
-        --autocomplete-input-focus-border-color: var(--autocomplete-input-border-color);
-        --autocomplete-suggestions-list-border-color: var(--autocomplete-input-border-color)
+        --autocomplete-input-focus-border-color: var(
+            --autocomplete-input-border-color
+        );
+        --autocomplete-suggestions-list-border-color: var(
+            --autocomplete-input-border-color
+        );
     }
     :global(.autocomplete-container) {
         position: relative;
