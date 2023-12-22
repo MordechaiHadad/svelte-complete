@@ -153,7 +153,7 @@
     on:click-outside={() => (showSuggestionsDiv = false)}
     bind:this={containerElement}
 >
-    <div
+    <button
         class="autocomplete-input-container"
         class:autocomplete-focused-input-container={showSuggestionsDiv}
         on:click={toggleSuggestions}
@@ -181,7 +181,7 @@
         >
             expand_more
         </button>
-    </div>
+    </button>
     {#if showSuggestionsDiv}
         <div
             bind:this={suggestionsContainerElement}
