@@ -54,7 +54,7 @@
             <Button
                 id="theme-button"
                 callback={() => themeHandler.toggle()}
-                title="Toggle between RTL/LTR text direction"
+                title="Toggle between dark/light theme"
             ></Button>
             <Button
                 icon="ti-text-direction-rtl"
